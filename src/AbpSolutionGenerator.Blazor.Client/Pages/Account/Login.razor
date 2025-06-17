@@ -1,0 +1,47 @@
+@page "/account/login"
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inherits AbpSolutionGeneratorComponentBase
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">@L["Login"]</h3>
+                </div>
+                <div class="card-body">
+                    <AuthorizeView>
+                        <Authorized>
+                            <div class="alert alert-success">
+                                <h4>@L["Welcome"], @context.User.Identity?.Name!</h4>
+                                <p>@L["YouAreAlreadyLoggedIn"]</p>
+                                <button class="btn btn-primary" @onclick="GoToHome">
+                                    @L["GoToHomePage"]
+                                </button>
+                            </div>
+                        </Authorized>
+                        <NotAuthorized>
+                            <div class="text-center">
+                                <p class="mb-4">@L["PleaseLoginToAccess"]</p>
+                                <a href="authentication/login" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-sign-in-alt me-2"></i>
+                                    @L["Login"]
+                                </a>
+                            </div>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private void GoToHome()
+    {
+        Navigation.NavigateTo("/");
+    }
+}

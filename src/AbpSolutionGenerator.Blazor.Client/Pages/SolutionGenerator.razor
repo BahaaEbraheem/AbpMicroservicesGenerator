@@ -1,0 +1,487 @@
+@page "/solution-generator"
+@using AbpSolutionGenerator.SolutionGeneration
+@using Microsoft.AspNetCore.Components.Forms
+@using Volo.Abp.AspNetCore.Components.Web
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@inherits AbpSolutionGeneratorComponentBase
+@inject ISolutionGeneratorAppService SolutionGeneratorService
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Solution Generator</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-cogs"></i>
+                        ABP Microservices Solution Generator
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit">
+                        <DataAnnotationsValidator />
+
+                        <!-- Solution Information -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="solutionName" class="form-label">Solution Name *</label>
+                                    <InputText id="solutionName" class="form-control" @bind-Value="Model.SolutionName"
+                                        placeholder="e.g., MyCompany.ECommerce" />
+                                    <ValidationMessage For="@(() => Model.SolutionName)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="companyName" class="form-label">Company Name *</label>
+                                    <InputText id="companyName" class="form-control" @bind-Value="Model.CompanyName"
+                                        placeholder="e.g., MyCompany" />
+                                    <ValidationMessage For="@(() => Model.CompanyName)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="description" class="form-label">Description</label>
+                                    <InputTextArea id="description" class="form-control" @bind-Value="Model.Description"
+                                        rows="3" placeholder="Brief description of your solution..." />
+                                    <ValidationMessage For="@(() => Model.Description)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configuration Options -->
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <InputCheckbox id="enableMultiTenancy" class="form-check-input"
+                                        @bind-Value="Model.EnableMultiTenancy" />
+                                    <label class="form-check-label" for="enableMultiTenancy">
+                                        Enable Multi-Tenancy
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <InputCheckbox id="enableSaas" class="form-check-input"
+                                        @bind-Value="Model.EnableSaas" />
+                                    <label class="form-check-label" for="enableSaas">
+                                        Enable SaaS
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="databaseProvider" class="form-label">Database Provider</label>
+                                    <InputSelect id="databaseProvider" class="form-select"
+                                        @bind-Value="Model.DatabaseProvider">
+                                        @foreach (var provider in Enum.GetValues<DatabaseProvider>())
+                                        {
+                                            <option value="@provider">@GetDisplayName(provider)</option>
+                                        }
+                                    </InputSelect>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="uiFramework" class="form-label">UI Framework</label>
+                                    <InputSelect id="uiFramework" class="form-select" @bind-Value="Model.UIFramework">
+                                        @foreach (var framework in Enum.GetValues<UIFramework>())
+                                        {
+                                            <option value="@framework">@GetDisplayName(framework)</option>
+                                        }
+                                    </InputSelect>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Microservices Section -->
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-microchip"></i>
+                                    Microservices Configuration
+                                </h5>
+                                <div>
+                                    <button type="button" class="btn btn-success btn-sm" @onclick="AddMicroservice">
+                                        <i class="fas fa-plus"></i> Add Microservice
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-sm ms-2" @onclick="ReassignPorts">
+                                        <i class="fas fa-sync"></i> Fix Ports
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                @if (Model.Microservices.Any())
+                                {
+                                    @for (int i = 0; i < Model.Microservices.Count; i++)
+                                    {
+                                        var index = i;
+                                        var microservice = Model.Microservices[index];
+
+                                        <div class="border rounded p-3 mb-3 microservice-item">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <h6 class="mb-0">Microservice #@(index + 1)</h6>
+                                                @if (Model.Microservices.Count > 1)
+                                                {
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        @onclick="() => RemoveMicroservice(index)">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                }
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Name *</label>
+                                                        <InputText class="form-control" @bind-Value="microservice.Name"
+                                                            placeholder="e.g., Catalog" />
+                                                        <ValidationMessage For="@(() => microservice.Name)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Port *</label>
+                                                        <InputNumber class="form-control" @bind-Value="microservice.Port" />
+                                                        <ValidationMessage For="@(() => microservice.Port)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Description</label>
+                                                        <InputText class="form-control" @bind-Value="microservice.Description"
+                                                            placeholder="Service description..." />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-2">
+                                                <div class="col-md-3">
+                                                    <div class="form-check">
+                                                        <InputCheckbox class="form-check-input"
+                                                            @bind-Value="microservice.EnableApi" />
+                                                        <label class="form-check-label">Enable API</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-check">
+                                                        <InputCheckbox class="form-check-input"
+                                                            @bind-Value="microservice.EnableGrpc" />
+                                                        <label class="form-check-label">Enable gRPC</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-check">
+                                                        <InputCheckbox class="form-check-input"
+                                                            @bind-Value="microservice.EnableBackgroundJobs" />
+                                                        <label class="form-check-label">Background Jobs</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-check">
+                                                        <InputCheckbox class="form-check-input"
+                                                            @bind-Value="microservice.IncludeSampleEntities" />
+                                                        <label class="form-check-label">Sample Entities</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i>
+                                        No microservices configured. Click "Add Microservice" to get started.
+                                    </div>
+                                }
+
+                                <ValidationMessage For="@(() => Model.Microservices)" />
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-secondary" @onclick="ResetForm">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                            <button type="submit" class="btn btn-primary" disabled="@IsGenerating">
+                                @if (IsGenerating)
+                                {
+                                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                    <span>Generating...</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Generate Solution</span>
+                                }
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Generation Progress Modal -->
+@if (IsGenerating && GenerationResponse != null)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-cogs"></i>
+                        Generating Solution: @Model.SolutionName
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="progress mb-3">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                            style="width: @(GenerationResponse.Progress)%">
+                            @(GenerationResponse.Progress)%
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Current Step:</strong> @GenerationResponse.CurrentStep
+                    </div>
+
+                    @if (GenerationResponse.Errors.Any())
+                    {
+                        <div class="alert alert-danger">
+                            <h6>Errors:</h6>
+                            <ul class="mb-0">
+                                @foreach (var error in GenerationResponse.Errors)
+                                {
+                                    <li>@error</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    protected SolutionGenerationRequest Model { get; set; } = new();
+    protected SolutionGenerationResponse? GenerationResponse { get; set; }
+    protected bool IsGenerating { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        // Initialize with default values
+        Model = new SolutionGenerationRequest
+        {
+            SolutionName = "",
+            CompanyName = "",
+            Description = "",
+            EnableMultiTenancy = true,
+            EnableSaas = true,
+            DatabaseProvider = DatabaseProvider.SqlServer,
+            UIFramework = UIFramework.BlazorWebApp
+        };
+
+        // Ensure at least one microservice exists
+        if (!Model.Microservices.Any())
+        {
+            await AddMicroservice();
+        }
+    }
+
+    protected async Task HandleValidSubmit()
+    {
+        try
+        {
+            IsGenerating = true;
+            StateHasChanged();
+
+            // Validate solution name
+            var isValidSolutionName = await SolutionGeneratorService.ValidateSolutionNameAsync(Model.SolutionName);
+            if (!isValidSolutionName)
+            {
+                await Message.Error("Invalid solution name. Please use a valid C# namespace format.");
+                return;
+            }
+
+            // Validate microservice names
+            foreach (var microservice in Model.Microservices)
+            {
+                var isValidMicroserviceName = await SolutionGeneratorService.ValidateMicroserviceNameAsync(microservice.Name);
+                if (!isValidMicroserviceName)
+                {
+                    await Message.Error($"Invalid microservice name: {microservice.Name}. Please use a valid C# identifier.");
+                    return;
+                }
+            }
+
+            // Check for duplicate ports
+            var duplicatePorts = Model.Microservices
+                .GroupBy(m => m.Port)
+                .Where(g => g.Count() > 1)
+                .Select(g => g.Key)
+                .ToList();
+
+            if (duplicatePorts.Any())
+            {
+                await Message.Error($"Duplicate ports found: {string.Join(", ", duplicatePorts)}. Each microservice must have a unique port.");
+                return;
+            }
+
+            // Start generation
+            GenerationResponse = await SolutionGeneratorService.GenerateSolutionAsync(Model);
+
+            if (GenerationResponse.IsCompleted)
+            {
+                await Message.Success("Solution generated successfully!");
+                await DownloadSolution();
+            }
+            else if (GenerationResponse.IsFailed)
+            {
+                await Message.Error($"Generation failed: {GenerationResponse.Message}");
+            }
+            else
+            {
+                // Start polling for progress updates
+                await PollGenerationProgress();
+            }
+        }
+        catch (Exception ex)
+        {
+            await Message.Error($"An error occurred: {ex.Message}");
+        }
+        finally
+        {
+            IsGenerating = false;
+            StateHasChanged();
+        }
+    }
+
+    protected async Task PollGenerationProgress()
+    {
+        if (GenerationResponse == null) return;
+
+        while (GenerationResponse.IsInProgress)
+        {
+            await Task.Delay(2000); // Poll every 2 seconds
+
+            try
+            {
+                GenerationResponse = await SolutionGeneratorService.GetGenerationStatusAsync(GenerationResponse.Id);
+                StateHasChanged();
+
+                if (GenerationResponse.IsCompleted)
+                {
+                    await Message.Success("Solution generated successfully!");
+                    await DownloadSolution();
+                    break;
+                }
+                else if (GenerationResponse.IsFailed)
+                {
+                    await Message.Error($"Generation failed: {GenerationResponse.Message}");
+                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Message.Error($"Error checking generation status: {ex.Message}");
+                break;
+            }
+        }
+    }
+
+    protected async Task DownloadSolution()
+    {
+        if (GenerationResponse == null || !GenerationResponse.IsCompleted) return;
+
+        try
+        {
+            var fileBytes = await SolutionGeneratorService.DownloadSolutionAsync(GenerationResponse.Id);
+            var fileName = $"{Model.SolutionName}.zip";
+
+            await JSRuntime.InvokeVoidAsync("downloadFile", fileName, Convert.ToBase64String(fileBytes));
+            await Message.Info("Download started!");
+        }
+        catch (Exception ex)
+        {
+            await Message.Error($"Download failed: {ex.Message}");
+        }
+    }
+
+    protected async Task AddMicroservice()
+    {
+        // Get currently used ports
+        var usedPorts = Model.Microservices.Select(m => m.Port).ToList();
+        var nextPort = await SolutionGeneratorService.GetNextAvailablePortWithExclusionsAsync(usedPorts);
+        var microserviceNumber = Model.Microservices.Count + 1;
+
+        Model.Microservices.Add(new MicroserviceRequest
+        {
+            Name = $"Service{microserviceNumber}",
+            Description = $"Microservice {microserviceNumber}",
+            Port = nextPort,
+            EnableApi = true,
+            EnableEventBus = true
+        });
+
+        StateHasChanged();
+    }
+
+    protected void RemoveMicroservice(int index)
+    {
+        if (Model.Microservices.Count > 1 && index >= 0 && index < Model.Microservices.Count)
+        {
+            Model.Microservices.RemoveAt(index);
+            StateHasChanged();
+        }
+    }
+
+    protected async Task ReassignPorts()
+    {
+        try
+        {
+            var startPort = 44305;
+            for (int i = 0; i < Model.Microservices.Count; i++)
+            {
+                Model.Microservices[i].Port = startPort + i;
+            }
+
+            StateHasChanged();
+            await Message.Success("Ports have been reassigned to avoid duplicates.");
+        }
+        catch (Exception ex)
+        {
+            await Message.Error($"Error reassigning ports: {ex.Message}");
+        }
+    }
+
+    protected void ResetForm()
+    {
+        Model = new SolutionGenerationRequest();
+        GenerationResponse = null;
+        IsGenerating = false;
+        StateHasChanged();
+    }
+
+    protected string GetDisplayName(Enum enumValue)
+    {
+        var displayAttribute = enumValue.GetType()
+            .GetMember(enumValue.ToString())
+            .FirstOrDefault()?
+            .GetCustomAttribute<DisplayAttribute>();
+
+        return displayAttribute?.Name ?? enumValue.ToString();
+    }
+}

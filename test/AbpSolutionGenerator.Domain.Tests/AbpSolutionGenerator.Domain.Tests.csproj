@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>AbpSolutionGenerator</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AbpSolutionGenerator.Domain\AbpSolutionGenerator.Domain.csproj" />
+    <ProjectReference Include="..\AbpSolutionGenerator.TestBase\AbpSolutionGenerator.TestBase.csproj" />
+  </ItemGroup>
+
+</Project>

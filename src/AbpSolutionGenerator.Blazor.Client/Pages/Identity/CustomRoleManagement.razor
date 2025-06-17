@@ -1,0 +1,117 @@
+@page "/identity/roles-custom"
+@using Volo.Abp.Identity
+@using Volo.Abp.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inherits AbpSolutionGeneratorComponentBase
+@inject IIdentityRoleAppService RoleAppService
+
+<Card>
+    <CardHeader>
+        <Row Class="justify-content-between">
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <h2>@L["CustomRoleManagement"]</h2>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsAuto">
+                <Button Color="Color.Primary" Clicked="OpenCreateRoleModal">
+                    <Icon Name="IconName.Add" />
+                    @L["NewRole"]
+                </Button>
+            </Column>
+        </Row>
+    </CardHeader>
+    <CardBody>
+        <DataGrid TItem="IdentityRoleDto" Data="Roles" ReadData="OnDataGridReadAsync" TotalItems="TotalCount"
+            ShowPager="true" PageSize="PageSize" Responsive="true">
+            <DataGridColumns>
+                <DataGridColumn TItem="IdentityRoleDto" Field="@nameof(IdentityRoleDto.Name)" Caption="@L["RoleName"]">
+                </DataGridColumn>
+                <DataGridColumn TItem="IdentityRoleDto" Field="@nameof(IdentityRoleDto.IsDefault)"
+                    Caption="@L["IsDefault"]">
+                    <DisplayTemplate>
+                        @if (context.IsDefault)
+                        {
+                            <Badge Color="Color.Success">@L["Yes"]</Badge>
+                        }
+                        else
+                        {
+                            <Badge Color="Color.Secondary">@L["No"]</Badge>
+                        }
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="IdentityRoleDto" Field="@nameof(IdentityRoleDto.IsPublic)"
+                    Caption="@L["IsPublic"]">
+                    <DisplayTemplate>
+                        @if (context.IsPublic)
+                        {
+                            <Badge Color="Color.Info">@L["Yes"]</Badge>
+                        }
+                        else
+                        {
+                            <Badge Color="Color.Secondary">@L["No"]</Badge>
+                        }
+                    </DisplayTemplate>
+                </DataGridColumn>
+                <DataGridColumn TItem="IdentityRoleDto" Field="@nameof(IdentityRoleDto.Id)" Caption="@L["Actions"]"
+                    Sortable="false">
+                    <DisplayTemplate>
+                        <Dropdown>
+                            <DropdownToggle Color="Color.Primary" Size="Size.Small">
+                                @L["Actions"]
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem Clicked="() => OpenEditRoleModal(context)">
+                                    @L["Edit"]
+                                </DropdownItem>
+                                <DropdownItem Clicked="() => OpenPermissionsModal(context)">
+                                    @L["Permissions"]
+                                </DropdownItem>
+                                <DropdownDivider />
+                                <DropdownItem Clicked="() => DeleteRole(context)">
+                                    @L["Delete"]
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </DisplayTemplate>
+                </DataGridColumn>
+            </DataGridColumns>
+        </DataGrid>
+    </CardBody>
+</Card>
+
+<!-- Create/Edit Role Modal -->
+<Modal @ref="RoleModal">
+    <ModalContent Centered="true">
+        <Form>
+            <ModalHeader>
+                <ModalTitle>@(EditingRoleId == null ? L["NewRole"] : L["EditRole"])</ModalTitle>
+                <CloseButton />
+            </ModalHeader>
+            <ModalBody>
+                <Validations @ref="@RoleValidationsRef" Model="@NewRole" ValidateOnLoad="false">
+                    <Validation>
+                        <Field>
+                            <FieldLabel>@L["RoleName"] *</FieldLabel>
+                            <TextEdit @bind-Text="@NewRole.Name">
+                                <Feedback>
+                                    <ValidationError />
+                                </Feedback>
+                            </TextEdit>
+                        </Field>
+                    </Validation>
+                    <Field>
+                        <Check TValue="bool" @bind-Checked="@NewRole.IsDefault">@L["IsDefault"]</Check>
+                    </Field>
+                    <Field>
+                        <Check TValue="bool" @bind-Checked="@NewRole.IsPublic">@L["IsPublic"]</Check>
+                    </Field>
+                </Validations>
+            </ModalBody>
+            <ModalFooter>
+                <Button Color="Color.Secondary" Clicked="CloseRoleModal">@L["Cancel"]</Button>
+                <Button Color="Color.Primary" Type="ButtonType.Submit" PreventDefaultOnSubmit="true"
+                    Clicked="CreateOrUpdateRole">@L["Save"]</Button>
+            </ModalFooter>
+        </Form>
+    </ModalContent>
+</Modal>
