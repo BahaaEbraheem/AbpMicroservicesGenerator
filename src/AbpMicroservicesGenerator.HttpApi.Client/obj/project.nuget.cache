@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "K8hPX2PqTSA=",
+  "dgSpecHash": "vz3NBc+J1uw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\asynckeyedlock\\7.1.6\\asynckeyedlock.7.1.6.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

@@ -1,4 +1,4 @@
-﻿{
+{
   "version": 3,
   "targets": {
     "net9.0": {
@@ -15537,17 +15537,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
       "projectName": "AbpMicroservicesGenerator.Blazor.Client",
-      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
+      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\NuGet.Config",
+        "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\NuGet.Config",
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -15563,8 +15563,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj": {
-              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj"
+            "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj": {
+              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj"
             }
           }
         }

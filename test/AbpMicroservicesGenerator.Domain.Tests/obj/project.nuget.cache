@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WEfvzkhaLfU=",
+  "dgSpecHash": "ebqGd5SHM6I=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\asynckeyedlock\\7.1.6\\asynckeyedlock.7.1.6.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\autofac\\8.2.1\\autofac.8.2.1.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "idTcKf57ZMs=",
+  "dgSpecHash": "uV30NyBbPfo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\asynckeyedlock\\7.1.6\\asynckeyedlock.7.1.6.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\autofac\\8.2.1\\autofac.8.2.1.nupkg.sha512",

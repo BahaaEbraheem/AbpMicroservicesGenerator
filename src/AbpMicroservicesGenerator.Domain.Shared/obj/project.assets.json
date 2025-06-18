@@ -1,4 +1,4 @@
-﻿{
+{
   "version": 3,
   "targets": {
     "net9.0": {
@@ -5024,17 +5024,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj",
       "projectName": "AbpMicroservicesGenerator.Domain.Shared",
-      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj",
+      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\NuGet.Config",
+        "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\NuGet.Config",
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

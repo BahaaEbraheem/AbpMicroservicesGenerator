@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O++Cif5OmQw=",
+  "dgSpecHash": "0RWI8I/vMCM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Host\\AbpMicroservicesGenerator.HttpApi.Host.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Host\\AbpMicroservicesGenerator.HttpApi.Host.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\asp.versioning.abstractions\\8.1.0\\asp.versioning.abstractions.8.1.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\asp.versioning.http\\8.1.0\\asp.versioning.http.8.1.0.nupkg.sha512",

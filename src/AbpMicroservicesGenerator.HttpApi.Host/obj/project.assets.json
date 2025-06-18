@@ -1,4 +1,4 @@
-﻿{
+{
   "version": 3,
   "targets": {
     "net9.0": {
@@ -15039,17 +15039,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Host\\AbpMicroservicesGenerator.HttpApi.Host.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Host\\AbpMicroservicesGenerator.HttpApi.Host.csproj",
       "projectName": "AbpMicroservicesGenerator.HttpApi.Host",
-      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Host\\AbpMicroservicesGenerator.HttpApi.Host.csproj",
+      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Host\\AbpMicroservicesGenerator.HttpApi.Host.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Host\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Host\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\NuGet.Config",
+        "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\NuGet.Config",
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -15065,14 +15065,14 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Application\\AbpMicroservicesGenerator.Application.csproj": {
-              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Application\\AbpMicroservicesGenerator.Application.csproj"
+            "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Application\\AbpMicroservicesGenerator.Application.csproj": {
+              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Application\\AbpMicroservicesGenerator.Application.csproj"
             },
-            "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\AbpMicroservicesGenerator.EntityFrameworkCore.csproj": {
-              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\AbpMicroservicesGenerator.EntityFrameworkCore.csproj"
+            "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\AbpMicroservicesGenerator.EntityFrameworkCore.csproj": {
+              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\AbpMicroservicesGenerator.EntityFrameworkCore.csproj"
             },
-            "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi\\AbpMicroservicesGenerator.HttpApi.csproj": {
-              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.HttpApi\\AbpMicroservicesGenerator.HttpApi.csproj"
+            "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi\\AbpMicroservicesGenerator.HttpApi.csproj": {
+              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi\\AbpMicroservicesGenerator.HttpApi.csproj"
             }
           }
         }

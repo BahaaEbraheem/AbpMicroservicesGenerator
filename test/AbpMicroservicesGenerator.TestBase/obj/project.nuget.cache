@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DSPq8dXMKtg=",
+  "dgSpecHash": "mXG/U2J5nzg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\autofac\\8.2.1\\autofac.8.2.1.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\autofac.extensions.dependencyinjection\\10.0.0\\autofac.extensions.dependencyinjection.10.0.0.nupkg.sha512",

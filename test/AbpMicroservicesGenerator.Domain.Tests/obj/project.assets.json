@@ -1,4 +1,4 @@
-﻿{
+{
   "version": 3,
   "targets": {
     "net9.0": {
@@ -8791,17 +8791,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj",
       "projectName": "AbpMicroservicesGenerator.Domain.Tests",
-      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj",
+      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\obj\\",
+      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\NuGet.Config",
+        "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\NuGet.Config",
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -8817,11 +8817,11 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj": {
-              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj"
+            "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj": {
+              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj"
             },
-            "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj": {
-              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpEntityGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj"
+            "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj": {
+              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj"
             }
           }
         }
