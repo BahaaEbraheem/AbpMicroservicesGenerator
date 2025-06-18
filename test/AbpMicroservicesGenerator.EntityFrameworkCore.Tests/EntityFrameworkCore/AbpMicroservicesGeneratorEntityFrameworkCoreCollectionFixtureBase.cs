@@ -1,0 +1,9 @@
+﻿using AbpMicroservicesGenerator.EntityFrameworkCore;
+using Xunit;
+
+namespace AbpMicroservicesGenerator.EntityFrameworkCore;
+
+public class AbpMicroservicesGeneratorEntityFrameworkCoreCollectionFixtureBase : ICollectionFixture<AbpMicroservicesGeneratorEntityFrameworkCoreFixture>
+{
+
+}

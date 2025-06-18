@@ -1,0 +1,9 @@
+﻿using Xunit;
+
+namespace AbpMicroservicesGenerator.EntityFrameworkCore;
+
+[CollectionDefinition(AbpMicroservicesGeneratorTestConsts.CollectionDefinitionName)]
+public class AbpMicroservicesGeneratorEntityFrameworkCoreCollection : ICollectionFixture<AbpMicroservicesGeneratorEntityFrameworkCoreFixture>
+{
+
+}

@@ -1,4 +1,4 @@
-# AbpSolutionGenerator
+﻿# AbpMicroservicesGenerator
 
 ## About this solution
 
@@ -13,7 +13,7 @@ This is a layered startup solution based on [Domain Driven Design (DDD)](https:/
 
 The solution comes with a default configuration that works out of the box. However, you may consider to change the following configuration before running your solution:
 
-* Check the `ConnectionStrings` in `appsettings.json` files under the `AbpSolutionGenerator.HttpApi.Host` and `AbpSolutionGenerator.DbMigrator` projects and change it if you need.
+* Check the `ConnectionStrings` in `appsettings.json` files under the `AbpMicroservicesGenerator.HttpApi.Host` and `AbpMicroservicesGenerator.DbMigrator` projects and change it if you need.
 
 ### Before running the application
 
@@ -47,15 +47,15 @@ abp install-libs
 
 #### Create the Database
 
-Run `AbpSolutionGenerator.DbMigrator` to create the initial database. This should be done in the first run. It is also needed if a new database migration is added to the solution later.
+Run `AbpMicroservicesGenerator.DbMigrator` to create the initial database. This should be done in the first run. It is also needed if a new database migration is added to the solution later.
 
 ### Solution structure
 
 This is a layered monolith application that consists of the following applications:
 
-* `AbpSolutionGenerator.DbMigrator`: A console application which applies the migrations and also seeds the initial data. It is useful on development as well as on production environment.
-* `AbpSolutionGenerator.HttpApi.Host`: ASP.NET Core API application that is used to expose the APIs to the clients.
-* `AbpSolutionGenerator.Blazor`: ASP.NET Core Blazor Server application that is the essential web application of the solution.
+* `AbpMicroservicesGenerator.DbMigrator`: A console application which applies the migrations and also seeds the initial data. It is useful on development as well as on production environment.
+* `AbpMicroservicesGenerator.HttpApi.Host`: ASP.NET Core API application that is used to expose the APIs to the clients.
+* `AbpMicroservicesGenerator.Blazor`: ASP.NET Core Blazor Server application that is the essential web application of the solution.
 
 ### Deploying the application
 
