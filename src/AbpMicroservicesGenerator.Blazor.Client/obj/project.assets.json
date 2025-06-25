@@ -1165,13 +1165,13 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.4": {
+      "Microsoft.NET.ILLink.Tasks/9.0.6": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.4": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.6": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -4749,13 +4749,13 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.4": {
+      "Microsoft.NET.ILLink.Tasks/9.0.6": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
-      "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.4": {
+      "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.6": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.Sdk.WebAssembly.Pack.props": {},
@@ -9072,10 +9072,10 @@
         "microsoft.net.http.headers.nuspec"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/9.0.4": {
-      "sha512": "xUdlUxiFwXhTYhB4VxKg/IA0+jlZXJPo70LYuMryWbJHdonIpZjw+7DO2B0pWwpXIOs6MlH5WVXPEtfrGEcVZA==",
+    "Microsoft.NET.ILLink.Tasks/9.0.6": {
+      "sha512": "TXy3SbJzGXQbxxIxCjdrp8bwEyTDImyYNpTpd6v7P3JL2Y7dno8EYG7dPezfYTa5SoWKdhbH9cbnwHHs3BR5gA==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.4",
+      "path": "microsoft.net.illink.tasks/9.0.6",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -9089,7 +9089,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.4.nupkg.sha512",
+        "microsoft.net.illink.tasks.9.0.6.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -9123,10 +9123,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.4": {
-      "sha512": "SbawDIBdWK+7UTkiIXquadlWAUPxV88+jytBdVsIFzvJXkxGGQKrufO4KPyYdS4shFtXLZyCuCckNt0YN5hZKw==",
+    "Microsoft.NET.Sdk.WebAssembly.Pack/9.0.6": {
+      "sha512": "0KAM0CWU4v1KbKdsyOAkqY3txcrvwVkgYkgRwCnKJS8so0B+O562YAUwDcok5YWC3qFK/+dBAwtn9KK1JL4Xrw==",
       "type": "package",
-      "path": "microsoft.net.sdk.webassembly.pack/9.0.4",
+      "path": "microsoft.net.sdk.webassembly.pack/9.0.6",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -9157,7 +9157,7 @@
         "build/Microsoft.NET.Sdk.WebAssembly.Pack.targets",
         "build/Wasm.web.config",
         "build/browser.runtimeconfig.template.json",
-        "microsoft.net.sdk.webassembly.pack.9.0.4.nupkg.sha512",
+        "microsoft.net.sdk.webassembly.pack.9.0.6.nupkg.sha512",
         "microsoft.net.sdk.webassembly.pack.nuspec",
         "tools/net472/Microsoft.NET.Sdk.WebAssembly.Pack.Tasks.dll",
         "tools/net472/Microsoft.NET.WebAssembly.Webcil.dll",
@@ -15521,8 +15521,8 @@
       "Blazorise.Icons.FontAwesome >= 1.7.6",
       "Microsoft.AspNetCore.Components.WebAssembly >= 9.0.4",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 9.0.4",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.4",
-      "Microsoft.NET.Sdk.WebAssembly.Pack >= 9.0.4",
+      "Microsoft.NET.ILLink.Tasks >= 9.0.6",
+      "Microsoft.NET.Sdk.WebAssembly.Pack >= 9.0.6",
       "Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXLiteTheme >= 4.1.0-preview*",
       "Volo.Abp.Autofac.WebAssembly >= 9.2.0",
       "Volo.Abp.Identity.Blazor.WebAssembly >= 9.2.0",
@@ -15531,24 +15531,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {},
+    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
+      "projectUniqueName": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
       "projectName": "AbpMicroservicesGenerator.Blazor.Client",
-      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\obj\\",
+      "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj",
+      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\NuGet.Config",
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Projects\\AbpMicroservicesGenerator\\NuGet.Config",
+        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -15563,8 +15563,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj": {
-              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj"
+            "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj": {
+              "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.HttpApi.Client\\AbpMicroservicesGenerator.HttpApi.Client.csproj"
             }
           }
         }
@@ -15579,7 +15579,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -15604,13 +15604,13 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.4, )",
+            "version": "[9.0.6, )",
             "autoReferenced": true
           },
           "Microsoft.NET.Sdk.WebAssembly.Pack": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.4, )",
+            "version": "[9.0.6, )",
             "autoReferenced": true
           },
           "Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXLiteTheme": {
@@ -15648,7 +15648,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.6, 9.0.6]"
           }
         ],
         "frameworkReferences": {
@@ -15656,7 +15656,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

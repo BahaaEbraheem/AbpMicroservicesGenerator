@@ -1,0 +1,14 @@
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\bin\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.deps.json
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\bin\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.dll
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\bin\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.pdb
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.csproj.AssemblyReference.cache
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.EmbeddedFilesManifest.cache
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.AssemblyInfoInputs.cache
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.AssemblyInfo.cs
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.csproj.CoreCompileInputs.cache
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.sourcelink.json
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.dll
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\refint\AbpMicroservicesGenerator.Domain.Shared.dll
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.pdb
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Domain.Shared\obj\Debug\net9.0\ref\AbpMicroservicesGenerator.Domain.Shared.dll

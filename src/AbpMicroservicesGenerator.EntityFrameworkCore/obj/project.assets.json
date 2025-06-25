@@ -11132,24 +11132,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {},
+    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\AbpMicroservicesGenerator.EntityFrameworkCore.csproj",
+      "projectUniqueName": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\AbpMicroservicesGenerator.EntityFrameworkCore.csproj",
       "projectName": "AbpMicroservicesGenerator.EntityFrameworkCore",
-      "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\AbpMicroservicesGenerator.EntityFrameworkCore.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\obj\\",
+      "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\AbpMicroservicesGenerator.EntityFrameworkCore.csproj",
+      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+      "outputPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.EntityFrameworkCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\NuGet.Config",
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Projects\\AbpMicroservicesGenerator\\NuGet.Config",
+        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11164,8 +11164,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj": {
-              "projectPath": "C:\\Users\\PC\\Documents\\augment-projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj"
+            "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj": {
+              "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj"
             }
           }
         }
@@ -11180,7 +11180,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -11245,7 +11245,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
