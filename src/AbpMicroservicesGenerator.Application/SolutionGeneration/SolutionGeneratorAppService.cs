@@ -210,10 +210,9 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
                 await GenerateBasicProjectFiles(subFolderPath, project, request, microservice);
 
                 var solutionFolder = $"services\\{microservice.Name}\\{subFolderType}";
-                var relativeProjectPath = Path.GetRelativePath(mainSolutionDirectory, projectFilePath);
-
-                await AddProjectToSolutionAsync(microserviceSolutionPath, solutionFolder, projectFilePath);
-                await AddProjectToSolutionAsync(mainSolutionPath, solutionFolder, relativeProjectPath);
+                //  var relativeProjectPath = Path.GetRelativePath(mainSolutionDirectory, projectFilePath);
+                await AddProjectToSolutionAsync(mainSolutionPath, solutionFolder, projectFilePath);
+                await AddProjectToSolutionAsync(microserviceSolutionPath, subFolderType, projectFilePath);
             }
 
             if (subFolderType == "host")
@@ -372,13 +371,15 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
 
             if (process.ExitCode != 0)
             {
-                Logger.LogError($"Failed to add project to solution: {error}");
+                Logger.LogError($"❌ Failed to add project to solution: {error}");
             }
             else
             {
-                Logger.LogInformation($"Project added to solution under '{solutionFolder}': {projectPath}");
+                Logger.LogInformation($"✅ Project added to solution under '{solutionFolder}': {projectPath}");
+                Logger.LogInformation($"dotnet output: {output}");
             }
         }
+
 
         private string GetProjectTypeFromName(string projectName)
         {

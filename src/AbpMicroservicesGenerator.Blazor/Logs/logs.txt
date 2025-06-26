@@ -6241,3 +6241,352 @@
 2025-06-26 16:46:25.865 +03:00 [INF] Executed endpoint 'Blazor web static files'
 2025-06-26 16:46:25.865 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 0.645ms
 2025-06-26 16:46:25.872 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 6.7717ms
+2025-06-26 16:57:09.474 +03:00 [INF] Starting web host.
+2025-06-26 16:57:12.431 +03:00 [DBG] Loaded ABP modules:
+2025-06-26 16:57:12.434 +03:00 [DBG] - AbpMicroservicesGenerator.Blazor.AbpMicroservicesGeneratorBlazorModule
+2025-06-26 16:57:12.434 +03:00 [DBG]   - Volo.Abp.Autofac.AbpAutofacModule
+2025-06-26 16:57:12.434 +03:00 [DBG]     - Volo.Abp.Castle.AbpCastleCoreModule
+2025-06-26 16:57:12.434 +03:00 [DBG]   - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]     - Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.AbpAspNetCoreMvcUiBootstrapModule
+2025-06-26 16:57:12.434 +03:00 [DBG]       - Volo.Abp.AspNetCore.Mvc.UI.AbpAspNetCoreMvcUiModule
+2025-06-26 16:57:12.434 +03:00 [DBG]         - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcModule
+2025-06-26 16:57:12.434 +03:00 [DBG]           - Volo.Abp.AspNetCore.AbpAspNetCoreModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.Auditing.AbpAuditingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Data.AbpDataModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.ObjectExtending.AbpObjectExtendingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                   - Volo.Abp.Localization.AbpLocalizationAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                   - Volo.Abp.Validation.AbpValidationAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.Uow.AbpUnitOfWorkModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.EventBus.Abstractions.AbpEventBusAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Json.AbpJsonModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.Json.SystemTextJson.AbpJsonSystemTextJsonModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                   - Volo.Abp.Json.AbpJsonAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                   - Volo.Abp.Timing.AbpTimingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                     - Volo.Abp.Localization.AbpLocalizationModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                       - Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                       - Volo.Abp.Settings.AbpSettingsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                         - Volo.Abp.Security.AbpSecurityModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                       - Volo.Abp.Threading.AbpThreadingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.MultiTenancy.AbpMultiTenancyModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.MultiTenancy.AbpMultiTenancyAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Auditing.AbpAuditingContractsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.Http.AbpHttpModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Http.AbpHttpAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Minify.AbpMinifyModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.Authorization.AbpAuthorizationModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Authorization.AbpAuthorizationAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.Validation.AbpValidationModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.ExceptionHandling.AbpExceptionHandlingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.AspNetCore.AbpAspNetCoreAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]           - Volo.Abp.ApiVersioning.AbpApiVersioningAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]           - Volo.Abp.AspNetCore.Mvc.AbpAspNetCoreMvcContractsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.Application.AbpDddApplicationContractsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]           - Volo.Abp.UI.Navigation.AbpUiNavigationModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.UI.AbpUiModule
+2025-06-26 16:57:12.434 +03:00 [DBG]           - Volo.Abp.GlobalFeatures.AbpGlobalFeaturesModule
+2025-06-26 16:57:12.434 +03:00 [DBG]           - Volo.Abp.Application.AbpDddApplicationModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.Domain.AbpDddDomainModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.EventBus.AbpEventBusModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.Guids.AbpGuidsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.BackgroundWorkers.AbpBackgroundWorkersModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.DistributedLocking.AbpDistributedLockingAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.ObjectMapping.AbpObjectMappingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Specifications.AbpSpecificationsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Caching.AbpCachingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]                 - Volo.Abp.Serialization.AbpSerializationModule
+2025-06-26 16:57:12.434 +03:00 [DBG]               - Volo.Abp.Domain.AbpDddDomainSharedModule
+2025-06-26 16:57:12.434 +03:00 [DBG]             - Volo.Abp.Features.AbpFeaturesModule
+2025-06-26 16:57:12.434 +03:00 [DBG]     - Volo.Abp.AspNetCore.Bundling.AbpAspNetCoreBundlingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]       - Volo.Abp.AspNetCore.Mvc.UI.Bundling.AbpAspNetCoreMvcUiBundlingAbstractionsModule
+2025-06-26 16:57:12.434 +03:00 [DBG]   - Volo.Abp.AspNetCore.Components.WebAssembly.LeptonXLiteTheme.Bundling.AbpAspNetCoreComponentsWebAssemblyLeptonXLiteThemeBundlingModule
+2025-06-26 16:57:12.434 +03:00 [DBG]     - Volo.Abp.AspNetCore.Components.WebAssembly.Theming.Bundling.AbpAspNetCoreComponentsWebAssemblyThemingBundlingModule
+2025-06-26 16:57:13.961 +03:00 [INF] User profile is available. Using 'C:\Users\Lenovo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-26 16:57:14.685 +03:00 [INF] Initialized all ABP modules.
+2025-06-26 16:57:14.983 +03:00 [INF] Now listening on: https://localhost:44337
+2025-06-26 16:57:17.731 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/ - null null
+2025-06-26 16:57:20.103 +03:00 [INF] The 'WebRootPath' is not set, The 'CheckLibs' feature not needed.
+2025-06-26 16:57:32.169 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-26 16:57:32.170 +03:00 [INF] Hosting environment: Development
+2025-06-26 16:57:32.170 +03:00 [INF] Content root path: C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Blazor
+2025-06-26 16:57:32.961 +03:00 [INF] Executing endpoint '/ (/)'
+2025-06-26 16:57:33.085 +03:00 [INF] Executed endpoint '/ (/)'
+2025-06-26 16:57:33.094 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/ - 200 null text/html; charset=utf-8 15365.4235ms
+2025-06-26 16:57:33.169 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:57:33.169 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.css - null null
+2025-06-26 16:57:33.173 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.js - null null
+2025-06-26 16:57:33.174 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-26 16:57:33.178 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:57:33.181 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:57:33.182 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:57:33.183 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 14.6249ms
+2025-06-26 16:57:33.194 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/aspnetcore-browser-refresh.js - 200 16549 application/javascript; charset=utf-8 20.232ms
+2025-06-26 16:57:33.230 +03:00 [INF] Sending file. Request path: '/global.css'. Physical path: 'N/A'
+2025-06-26 16:57:33.230 +03:00 [INF] Sending file. Request path: '/global.js'. Physical path: 'N/A'
+2025-06-26 16:57:33.233 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.css - 200 663446 text/css 65.1396ms
+2025-06-26 16:57:33.233 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.js - 200 678081 application/javascript 59.4354ms
+2025-06-26 16:57:33.749 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:57:33.803 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 54.015ms
+2025-06-26 16:57:34.190 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.boot.json - null null
+2025-06-26 16:57:34.191 +03:00 [INF] The file /_framework/blazor.boot.json was not modified
+2025-06-26 16:57:34.193 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.boot.json - 304 null application/json 3.2275ms
+2025-06-26 16:57:34.325 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/appsettings.json - null null
+2025-06-26 16:57:34.326 +03:00 [INF] The file /appsettings.json was not modified
+2025-06-26 16:57:34.326 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/appsettings.json - 304 null application/json 1.4498ms
+2025-06-26 16:57:42.943 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=70cd5ff07ae044f8b5b0d5753f5a8b93&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:57:43.054 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:43.057 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:43.057 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=70cd5ff07ae044f8b5b0d5753f5a8b93&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 114.3003ms
+2025-06-26 16:57:43.091 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.css - null null
+2025-06-26 16:57:43.092 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:57:43.092 +03:00 [INF] The file /global.css was not modified
+2025-06-26 16:57:43.092 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.css - 304 null text/css 0.6238ms
+2025-06-26 16:57:43.092 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:57:43.092 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:57:43.093 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:57:43.093 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 1.02ms
+2025-06-26 16:57:43.144 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.js - null null
+2025-06-26 16:57:43.145 +03:00 [INF] The file /global.js was not modified
+2025-06-26 16:57:43.145 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.js - 304 null application/javascript 0.9412ms
+2025-06-26 16:57:43.170 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:57:43.188 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 17.7709ms
+2025-06-26 16:57:46.446 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=3353d47d46ee4f51acbc07ff09c0f53d&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:57:46.450 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:46.454 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:46.454 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=3353d47d46ee4f51acbc07ff09c0f53d&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 7.7715ms
+2025-06-26 16:57:46.493 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.css - null null
+2025-06-26 16:57:46.494 +03:00 [INF] The file /global.css was not modified
+2025-06-26 16:57:46.495 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.css - 304 null text/css 1.6524ms
+2025-06-26 16:57:46.495 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:57:46.497 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:57:46.498 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:57:46.498 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:57:46.498 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 2.947ms
+2025-06-26 16:57:46.568 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.js - null null
+2025-06-26 16:57:46.570 +03:00 [INF] The file /global.js was not modified
+2025-06-26 16:57:46.571 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.js - 304 null application/javascript 2.2591ms
+2025-06-26 16:57:46.656 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:57:46.669 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 12.4782ms
+2025-06-26 16:57:47.582 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=467927f675c64a19a75a28a04e21c261&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:57:47.586 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:47.588 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:47.589 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=467927f675c64a19a75a28a04e21c261&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 6.9189ms
+2025-06-26 16:57:47.643 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:57:47.644 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:57:47.644 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:57:47.645 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:57:47.645 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:57:47.645 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 2.1525ms
+2025-06-26 16:57:47.655 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 10.8266ms
+2025-06-26 16:57:48.342 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=8eb9eaf2ebdc42e6a272faf025e463b4&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:57:48.347 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:48.350 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:48.351 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=8eb9eaf2ebdc42e6a272faf025e463b4&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 8.102ms
+2025-06-26 16:57:48.411 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:57:48.412 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:57:48.413 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:57:48.413 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:57:48.413 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:57:48.413 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 2.3562ms
+2025-06-26 16:57:48.437 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.5107ms
+2025-06-26 16:57:49.107 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=91f33f7a202b489ba110b48a0bc955d6&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:57:49.112 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:49.114 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:49.114 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=91f33f7a202b489ba110b48a0bc955d6&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 7.2167ms
+2025-06-26 16:57:49.175 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:57:49.177 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:57:49.177 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:57:49.177 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:57:49.177 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 2.5603ms
+2025-06-26 16:57:49.179 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:57:49.189 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 9.8398ms
+2025-06-26 16:57:49.653 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor-hotreload - null null
+2025-06-26 16:57:49.656 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor-hotreload - 204 null null 3.1534ms
+2025-06-26 16:57:57.055 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=7614aa26d155419ba08bdb1403da6c4d&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:57:57.057 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:57.058 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:57:57.058 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=7614aa26d155419ba08bdb1403da6c4d&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 3.0974ms
+2025-06-26 16:57:57.094 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.css - null null
+2025-06-26 16:57:57.095 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:57:57.095 +03:00 [INF] The file /global.css was not modified
+2025-06-26 16:57:57.095 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.css - 304 null text/css 0.7188ms
+2025-06-26 16:57:57.095 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:57:57.096 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:57:57.096 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:57:57.096 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 1.1723ms
+2025-06-26 16:57:57.119 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.js - null null
+2025-06-26 16:57:57.120 +03:00 [INF] The file /global.js was not modified
+2025-06-26 16:57:57.120 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.js - 304 null application/javascript 0.4991ms
+2025-06-26 16:57:57.145 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:57:57.150 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 4.3004ms
+2025-06-26 16:58:34.976 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=be88822ba3264e4181943a9a9294d17c&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:34.978 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:34.979 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:34.979 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=be88822ba3264e4181943a9a9294d17c&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 3.1409ms
+2025-06-26 16:58:34.991 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.css - null null
+2025-06-26 16:58:34.991 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:34.991 +03:00 [INF] The file /global.css was not modified
+2025-06-26 16:58:34.991 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.css - 304 null text/css 0.3854ms
+2025-06-26 16:58:34.991 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.js - null null
+2025-06-26 16:58:34.991 +03:00 [INF] The file /global.js was not modified
+2025-06-26 16:58:34.991 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.js - 304 null application/javascript 0.116ms
+2025-06-26 16:58:34.991 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:34.991 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:34.991 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:34.991 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 0.5178ms
+2025-06-26 16:58:34.998 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:35.000 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2.1357ms
+2025-06-26 16:58:35.367 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=52f3f9404d05472782923f4726057371&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:35.368 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:35.369 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:35.369 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=52f3f9404d05472782923f4726057371&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 1.7625ms
+2025-06-26 16:58:35.380 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:35.380 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:35.380 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:35.380 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:35.380 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:35.380 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 0.776ms
+2025-06-26 16:58:35.382 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2.4353ms
+2025-06-26 16:58:35.518 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=f62d3ec7676e45d0b1c59549ae8d0e00&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:35.519 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:35.521 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:35.521 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=f62d3ec7676e45d0b1c59549ae8d0e00&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 2.659ms
+2025-06-26 16:58:35.531 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:35.532 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:35.532 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:35.532 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:35.532 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:35.532 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 0.5735ms
+2025-06-26 16:58:35.534 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2.5772ms
+2025-06-26 16:58:35.764 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=4386869d86284a9e98d8307ca59aa65c&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:35.765 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:35.766 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:35.766 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=4386869d86284a9e98d8307ca59aa65c&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 2.5265ms
+2025-06-26 16:58:35.779 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:35.779 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:35.780 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:35.780 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:35.780 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:35.780 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 1.088ms
+2025-06-26 16:58:35.782 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 3.2035ms
+2025-06-26 16:58:38.144 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=0509b28b7e4945818f9a6ef564eccc12&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:38.146 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:38.147 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:38.147 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=0509b28b7e4945818f9a6ef564eccc12&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 2.436ms
+2025-06-26 16:58:38.162 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:38.162 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:38.162 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:38.162 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:38.163 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:38.163 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 0.6757ms
+2025-06-26 16:58:38.166 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 4.0875ms
+2025-06-26 16:58:40.785 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=2c52b4b2b63146c38769c6e4e046a49e&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:40.790 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:40.792 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:40.793 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=2c52b4b2b63146c38769c6e4e046a49e&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 8.1125ms
+2025-06-26 16:58:40.877 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:40.880 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:40.880 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:40.880 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:40.881 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 3.1911ms
+2025-06-26 16:58:40.885 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:40.897 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 12.3568ms
+2025-06-26 16:58:43.539 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=51aa582b71d347229ee31467a6dd1022&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:43.541 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:43.543 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:43.543 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=51aa582b71d347229ee31467a6dd1022&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 4.1243ms
+2025-06-26 16:58:43.576 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.css - null null
+2025-06-26 16:58:43.577 +03:00 [INF] The file /global.css was not modified
+2025-06-26 16:58:43.577 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.css - 304 null text/css 1.0213ms
+2025-06-26 16:58:43.577 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:43.577 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.js - null null
+2025-06-26 16:58:43.578 +03:00 [INF] The file /global.js was not modified
+2025-06-26 16:58:43.578 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.js - 304 null application/javascript 0.554ms
+2025-06-26 16:58:43.579 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:43.579 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:43.579 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:43.579 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 1.7546ms
+2025-06-26 16:58:43.604 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:43.611 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 6.6081ms
+2025-06-26 16:58:46.187 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=0802719666e44559a41b3de203cd6ccb&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:46.189 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:46.190 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:46.190 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=0802719666e44559a41b3de203cd6ccb&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 3.3431ms
+2025-06-26 16:58:46.223 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:46.224 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:46.224 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:46.224 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:46.225 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:46.225 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 1.3029ms
+2025-06-26 16:58:46.231 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 6.2982ms
+2025-06-26 16:58:48.645 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=9c7660a8b2ed444c97933242e28a89c5&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:48.647 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:48.649 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:48.649 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=9c7660a8b2ed444c97933242e28a89c5&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 4.6911ms
+2025-06-26 16:58:48.685 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:48.686 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:48.686 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:48.686 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:48.686 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:48.686 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 1.0369ms
+2025-06-26 16:58:48.690 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 4.4071ms
+2025-06-26 16:58:51.173 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=c5131659c3734a279eb3aac1a6c9783d&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:51.177 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:51.181 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:51.181 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=c5131659c3734a279eb3aac1a6c9783d&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 7.9703ms
+2025-06-26 16:58:51.245 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:51.246 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:51.246 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:51.246 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:51.246 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 1.2441ms
+2025-06-26 16:58:51.247 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:51.252 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 4.2086ms
+2025-06-26 16:58:53.687 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=96accaa0c9f44d0c85999425464657fd&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:53.689 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:53.690 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:53.690 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=96accaa0c9f44d0c85999425464657fd&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 2.7468ms
+2025-06-26 16:58:53.735 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.css - null null
+2025-06-26 16:58:53.735 +03:00 [INF] The file /global.css was not modified
+2025-06-26 16:58:53.735 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.css - 304 null text/css 0.6701ms
+2025-06-26 16:58:53.736 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:53.736 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:53.736 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:53.737 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:53.737 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 1.0375ms
+2025-06-26 16:58:53.737 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/global.js - null null
+2025-06-26 16:58:53.738 +03:00 [INF] The file /global.js was not modified
+2025-06-26 16:58:53.738 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/global.js - 304 null application/javascript 0.3869ms
+2025-06-26 16:58:53.763 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:53.767 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 4.3952ms
+2025-06-26 16:58:56.251 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=9985dec58d40451b9bab9fbda1cda423&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:56.253 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:56.254 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:56.254 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=9985dec58d40451b9bab9fbda1cda423&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 2.912ms
+2025-06-26 16:58:56.296 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:56.297 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:56.297 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:56.297 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:56.297 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 0.9057ms
+2025-06-26 16:58:56.297 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:56.302 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 4.5216ms
+2025-06-26 16:58:58.676 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=67e45e4832fe4e299491882fe140396b&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:58.678 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:58.679 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:58.679 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=67e45e4832fe4e299491882fe140396b&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 2.351ms
+2025-06-26 16:58:58.700 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:58.701 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:58.701 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:58.701 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:58.701 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:58.701 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 0.7267ms
+2025-06-26 16:58:58.704 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 2.8366ms
+2025-06-26 16:58:59.120 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=cc7eed1d001b44b6a4a768cfc433d42d&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - null null
+2025-06-26 16:58:59.122 +03:00 [INF] Executing endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:59.123 +03:00 [INF] Executed endpoint '/authentication/{action} (/authentication/{action})'
+2025-06-26 16:58:59.123 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/authentication/login-callback?error=login_required&error_description=The%20user%20is%20not%20logged%20in.&error_uri=https%3A%2F%2Fdocumentation.openiddict.com%2Ferrors%2FID2015&state=cc7eed1d001b44b6a4a768cfc433d42d&iss=https%3A%2F%2Flocalhost%3A44358%2F&culture=ar&ui-culture=ar - 200 null text/html; charset=utf-8 3.4446ms
+2025-06-26 16:58:59.156 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - null null
+2025-06-26 16:58:59.157 +03:00 [INF] Executing endpoint 'Blazor web static files'
+2025-06-26 16:58:59.157 +03:00 [INF] The file /_framework/blazor.web.js was not modified
+2025-06-26 16:58:59.157 +03:00 [INF] Executed endpoint 'Blazor web static files'
+2025-06-26 16:58:59.157 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44337/_vs/browserLink - null null
+2025-06-26 16:58:59.157 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_framework/blazor.web.js - 304 null text/javascript 0.7411ms
+2025-06-26 16:58:59.161 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44337/_vs/browserLink - 200 null text/javascript; charset=UTF-8 3.6773ms

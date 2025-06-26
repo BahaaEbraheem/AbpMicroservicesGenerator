@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AbpMicroservicesGenerator.HttpApi.Host")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+16d4644cff53aba740547388bcf1787a6b832bb1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57e17e12cffd2b4901aeab6be0e9a0f0cf3f3bde")]
 [assembly: System.Reflection.AssemblyProductAttribute("AbpMicroservicesGenerator.HttpApi.Host")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AbpMicroservicesGenerator.HttpApi.Host")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
