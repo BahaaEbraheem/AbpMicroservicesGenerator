@@ -5,18 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1A94A50E-06DC-43C1-80B5-B662820EC3EB}|src\\AbpMicroservicesGenerator.Application\\AbpMicroservicesGenerator.Application.csproj|c:\\projects\\abpmicroservicesgenerator\\src\\abpmicroservicesgenerator.application\\solutiongeneration\\solutiongeneratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A94A50E-06DC-43C1-80B5-B662820EC3EB}|src\\AbpMicroservicesGenerator.Application\\AbpMicroservicesGenerator.Application.csproj|solutionrelative:src\\abpmicroservicesgenerator.application\\solutiongeneration\\solutiongeneratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{520659C8-C734-4298-A3DA-B539DB9DFC0B}|src\\AbpMicroservicesGenerator.Application.Contracts\\AbpMicroservicesGenerator.Application.Contracts.csproj|c:\\projects\\abpmicroservicesgenerator\\src\\abpmicroservicesgenerator.application.contracts\\solutiongeneration\\isolutiongeneratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{520659C8-C734-4298-A3DA-B539DB9DFC0B}|src\\AbpMicroservicesGenerator.Application.Contracts\\AbpMicroservicesGenerator.Application.Contracts.csproj|solutionrelative:src\\abpmicroservicesgenerator.application.contracts\\solutiongeneration\\isolutiongeneratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{188A64AD-A1A7-4F95-85D1-C935594611B7}|src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj|c:\\projects\\abpmicroservicesgenerator\\src\\abpmicroservicesgenerator.blazor.client\\pages\\solutiongenerator.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{188A64AD-A1A7-4F95-85D1-C935594611B7}|src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj|solutionrelative:src\\abpmicroservicesgenerator.blazor.client\\pages\\solutiongenerator.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{188A64AD-A1A7-4F95-85D1-C935594611B7}|src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj|c:\\projects\\abpmicroservicesgenerator\\src\\abpmicroservicesgenerator.blazor.client\\components\\customlogindisplay.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{188A64AD-A1A7-4F95-85D1-C935594611B7}|src\\AbpMicroservicesGenerator.Blazor.Client\\AbpMicroservicesGenerator.Blazor.Client.csproj|solutionrelative:src\\abpmicroservicesgenerator.blazor.client\\components\\customlogindisplay.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,60 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ISolutionGeneratorAppService.cs",
-              "DocumentMoniker": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Application.Contracts\\SolutionGeneration\\ISolutionGeneratorAppService.cs",
-              "RelativeDocumentMoniker": "src\\AbpMicroservicesGenerator.Application.Contracts\\SolutionGeneration\\ISolutionGeneratorAppService.cs",
-              "ToolTip": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Application.Contracts\\SolutionGeneration\\ISolutionGeneratorAppService.cs",
-              "RelativeToolTip": "src\\AbpMicroservicesGenerator.Application.Contracts\\SolutionGeneration\\ISolutionGeneratorAppService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T10:34:53.894Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SolutionGenerator.razor",
-              "DocumentMoniker": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\Pages\\SolutionGenerator.razor",
-              "RelativeDocumentMoniker": "src\\AbpMicroservicesGenerator.Blazor.Client\\Pages\\SolutionGenerator.razor",
-              "ToolTip": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\Pages\\SolutionGenerator.razor",
-              "RelativeToolTip": "src\\AbpMicroservicesGenerator.Blazor.Client\\Pages\\SolutionGenerator.razor",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAAABYAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-25T10:34:08.941Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CustomLoginDisplay.razor",
-              "DocumentMoniker": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\Components\\CustomLoginDisplay.razor",
-              "RelativeDocumentMoniker": "src\\AbpMicroservicesGenerator.Blazor.Client\\Components\\CustomLoginDisplay.razor",
-              "ToolTip": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Blazor.Client\\Components\\CustomLoginDisplay.razor",
-              "RelativeToolTip": "src\\AbpMicroservicesGenerator.Blazor.Client\\Components\\CustomLoginDisplay.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-25T10:34:03.714Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -88,9 +24,9 @@
               "RelativeDocumentMoniker": "src\\AbpMicroservicesGenerator.Application\\SolutionGeneration\\SolutionGeneratorAppService.cs",
               "ToolTip": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Application\\SolutionGeneration\\SolutionGeneratorAppService.cs",
               "RelativeToolTip": "src\\AbpMicroservicesGenerator.Application\\SolutionGeneration\\SolutionGeneratorAppService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEBAAApAAAAAAAAAA==",
+              "ViewState": "AgIAADcBAAAAAAAAAAAAwEQBAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T15:39:37.23Z",
+              "WhenOpened": "2025-06-25T11:17:08.693Z",
               "EditorCaption": ""
             }
           ]

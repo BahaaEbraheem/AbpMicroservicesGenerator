@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 using Volo.Abp.Application.Services;
 
 namespace AbpMicroservicesGenerator.SolutionGeneration
@@ -52,11 +54,9 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
                     Progress = 0
                 };
 
-                // Cache the response for progress tracking
                 _generationCache[response.Id] = response;
                 Logger.LogInformation("Added generation {Id} to cache. Cache now contains {Count} items.", response.Id, _generationCache.Count);
 
-                // Start generation in background
                 _ = Task.Run(async () => await GenerateSolutionInternalAsync(request, response));
 
                 return response;
@@ -78,53 +78,26 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
 
         private async Task GenerateSolutionInternalAsync(SolutionGenerationRequest request, SolutionGenerationResponse response)
         {
-            var solutionPath = Path.Combine(_outputPath, response.Id.ToString());
+            var solutionPath = Path.Combine(_outputPath, request.SolutionName);
 
             try
             {
                 Logger.LogInformation("Starting internal generation for {SolutionName} at {SolutionPath}", request.SolutionName, solutionPath);
 
-                // Step 1: إنشاء مجلد الحل
                 response.CurrentStep = "Creating solution directory...";
                 response.Progress = 5;
                 Directory.CreateDirectory(solutionPath);
                 Logger.LogInformation("Created solution directory: {SolutionPath}", solutionPath);
                 await Task.Delay(500);
 
-                // Step 2: إنشاء ملف الحل الرئيسي
-                response.CurrentStep = "Generating solution file...";
-                response.Progress = 15;
-                await GenerateSolutionFileAsync(solutionPath, request);
+                var mainSolutionName = $"{request.CompanyName}.{request.SolutionName}";
+                var mainSolutionPath = Path.Combine(solutionPath, $"{mainSolutionName}.sln");
+                await CreateMainSolutionAsync(mainSolutionPath);
 
-                // Step 3: إنشاء هيكل المشروع
                 response.CurrentStep = "Creating project structure...";
-                response.Progress = 25;
+                response.Progress = 15;
                 await CreateProjectStructureAsync(solutionPath, request);
 
-                // Step 4: إنشاء الخدمات المصغرة
-                response.CurrentStep = "Generating microservices...";
-                response.Progress = 40;
-
-                for (int i = 0; i < request.Microservices.Count; i++)
-                {
-                    var microservice = request.Microservices[i];
-                    response.CurrentStep = $"Generating microservice: {microservice.Name}...";
-                    response.Progress = 40 + (30 * (i + 1) / request.Microservices.Count);
-
-                    await GenerateMicroserviceAsync(solutionPath, request, microservice);
-                }
-
-                // Step 5: إنشاء الملفات المشتركة
-                response.CurrentStep = "Generating shared files...";
-                response.Progress = 80;
-                await GenerateSharedFilesAsync(solutionPath, request);
-
-                // Step 6: إنشاء ملف ZIP
-                response.CurrentStep = "Creating ZIP package...";
-                response.Progress = 90;
-                var zipPath = await CreateZipPackageAsync(solutionPath, request.SolutionName);
-
-                // اكتمال العملية
                 response.Status = GenerationStatus.Completed;
                 response.Progress = 100;
                 response.CurrentStep = "Completed successfully!";
@@ -132,7 +105,6 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
                 response.Message = "Solution generated successfully!";
                 response.GeneratedFiles = GetGeneratedFilesList(solutionPath);
                 response.DownloadUrl = $"/api/solution-generator/download/{response.Id}";
-                response.FileSizeBytes = new FileInfo(zipPath).Length;
 
                 Logger.LogInformation("Solution generated at: {SolutionPath}", solutionPath);
             }
@@ -144,13 +116,567 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
                 response.Errors.Add(ex.Message);
                 response.CompletedAt = DateTime.UtcNow;
 
-                // تنظيف المجلد في حالة الفشل
                 if (Directory.Exists(solutionPath))
                 {
                     try { Directory.Delete(solutionPath, true); } catch { }
                 }
             }
         }
+
+        private async Task CreateProjectStructureAsync(string solutionPath, SolutionGenerationRequest request)
+        {
+            Logger.LogInformation($"Creating project structure at: {solutionPath}");
+
+            if (request.Microservices == null || !request.Microservices.Any())
+            {
+                Logger.LogWarning("No microservices provided in the request. Skipping project structure creation.");
+                return;
+            }
+
+            var servicesPath = Path.Combine(solutionPath, "services");
+            Directory.CreateDirectory(servicesPath);
+            Logger.LogInformation($"Created services folder: {servicesPath}");
+
+            foreach (var service in request.Microservices)
+            {
+                if (string.IsNullOrEmpty(service.Name))
+                {
+                    Logger.LogWarning("Microservice name is empty. Skipping.");
+                    continue;
+                }
+
+                var servicePath = Path.Combine(servicesPath, service.Name);
+                Directory.CreateDirectory(servicePath);
+                Logger.LogInformation($"Created service folder: {servicePath}");
+
+                var serviceSubFolders = new[] { "src", "host", "test" };
+                foreach (var subFolder in serviceSubFolders)
+                {
+                    var subFolderPath = Path.Combine(servicePath, subFolder);
+                    Directory.CreateDirectory(subFolderPath);
+                    Logger.LogInformation($"Created service subfolder: {subFolderPath}");
+
+                    await GenerateMicroserviceProjectsAsync(subFolderPath, request, service, subFolder, solutionPath);
+                }
+
+                await GenerateSolutionFileAsync(servicePath, request, service);
+            }
+
+            await Task.CompletedTask;
+        }
+
+        private async Task GenerateMicroserviceProjectsAsync(string subFolderPath, SolutionGenerationRequest request, MicroserviceRequest microservice, string subFolderType, string mainSolutionDirectory)
+        {
+            Logger.LogInformation($"Generating projects for microservice: {microservice.Name} in {subFolderType}");
+
+            var projects = subFolderType switch
+            {
+                "src" => new[]
+                {
+                $"{request.CompanyName}.{microservice.Name}.Domain.Shared",
+                $"{request.CompanyName}.{microservice.Name}.Domain",
+                $"{request.CompanyName}.{microservice.Name}.Application.Contracts",
+                $"{request.CompanyName}.{microservice.Name}.Application",
+                $"{request.CompanyName}.{microservice.Name}.EntityFrameworkCore",
+                $"{request.CompanyName}.{microservice.Name}.HttpApi",
+                $"{request.CompanyName}.{microservice.Name}.HttpApi.Client"
+            },
+                "host" => new[]
+                {
+                $"{request.CompanyName}.{microservice.Name}.HttpApi.Host"
+            },
+                "test" => new[]
+                {
+                $"{request.CompanyName}.{microservice.Name}.Tests"
+            },
+                _ => Array.Empty<string>()
+            };
+
+            var serviceFolderPath = Path.Combine(mainSolutionDirectory, "services", microservice.Name);
+            var microserviceSolutionPath = Path.Combine(serviceFolderPath, $"{request.CompanyName}.{microservice.Name}.sln");
+            var mainSolutionPath = Path.Combine(mainSolutionDirectory, $"{request.CompanyName}.{request.SolutionName}.sln");
+
+            foreach (var project in projects)
+            {
+                var projectType = GetProjectTypeFromName(project);
+                var projectContent = subFolderType == "host"
+                    ? GenerateHostProjectContent(project, microservice, request)
+                    : GenerateProjectFileContent(project, microservice, projectType);
+
+                var projectFilePath = Path.Combine(subFolderPath, $"{project}.csproj");
+                await File.WriteAllTextAsync(projectFilePath, projectContent);
+                Logger.LogInformation($"Created project file: {projectFilePath}");
+
+                await GenerateBasicProjectFiles(subFolderPath, project, request, microservice);
+
+                var solutionFolder = $"services\\{microservice.Name}\\{subFolderType}";
+                var relativeProjectPath = Path.GetRelativePath(mainSolutionDirectory, projectFilePath);
+
+                await AddProjectToSolutionAsync(microserviceSolutionPath, solutionFolder, projectFilePath);
+                await AddProjectToSolutionAsync(mainSolutionPath, solutionFolder, relativeProjectPath);
+            }
+
+            if (subFolderType == "host")
+            {
+                await GenerateHostFiles(subFolderPath, $"{request.CompanyName}.{microservice.Name}.HttpApi.Host", request, microservice);
+            }
+        }
+
+        private async Task CreateMainSolutionAsync(string solutionPath)
+        {
+            if (File.Exists(solutionPath))
+            {
+                Logger.LogInformation($"Main solution already exists: {solutionPath}");
+                return;
+            }
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"new sln -n \"{Path.GetFileNameWithoutExtension(solutionPath)}\"",
+                WorkingDirectory = Path.GetDirectoryName(solutionPath),
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = Process.Start(psi);
+            var output = await process.StandardOutput.ReadToEndAsync();
+            var error = await process.StandardError.ReadToEndAsync();
+            await process.WaitForExitAsync();
+
+            if (process.ExitCode != 0)
+            {
+                Logger.LogError($"Failed to create main solution: {error}");
+            }
+            else
+            {
+                Logger.LogInformation($"Main solution created: {solutionPath}");
+            }
+        }
+
+        private async Task GenerateSolutionFileAsync(string servicePath, SolutionGenerationRequest request, MicroserviceRequest microservice)
+        {
+            Logger.LogInformation($"Generating solution file for microservice: {microservice.Name}");
+
+            var solutionName = $"{request.CompanyName}.{microservice.Name}";
+            var solutionFilePath = Path.Combine(servicePath, $"{solutionName}.sln");
+            var solutionContent = new StringBuilder();
+
+            solutionContent.AppendLine();
+            solutionContent.AppendLine("Microsoft Visual Studio Solution File, Format Version 12.00");
+            solutionContent.AppendLine("# Visual Studio Version 17");
+            solutionContent.AppendLine("VisualStudioVersion = 17.0.31903.59");
+            solutionContent.AppendLine("MinimumVisualStudioVersion = 10.0.40219.1");
+
+            var subFolders = new[] { "src", "host", "test" };
+            var projectGuids = new Dictionary<string, Guid>();
+            var solutionFoldersGuids = new Dictionary<string, Guid>();
+            foreach (var subFolder in subFolders)
+            {
+                var subFolderPath = Path.Combine(servicePath, subFolder);
+                if (!Directory.Exists(subFolderPath))
+                {
+                    Logger.LogWarning($"Subfolder {subFolderPath} does not exist. Skipping.");
+                    continue;
+                }
+
+                var solutionFolderGuid = Guid.NewGuid();
+                solutionFoldersGuids[subFolder] = solutionFolderGuid;
+
+                solutionContent.AppendLine($"Project(\"{{2150E333-8FDC-42A3-9474-1A3956D46DE8}}\") = \"{subFolder}\", \"{subFolder}\", \"{{{solutionFolderGuid}}}\"");
+                solutionContent.AppendLine("EndProject");
+
+                var csprojFiles = Directory.GetFiles(subFolderPath, "*.csproj");
+                foreach (var csprojFile in csprojFiles)
+                {
+                    var projectName = Path.GetFileNameWithoutExtension(csprojFile);
+                    var projectGuid = Guid.NewGuid();
+                    projectGuids[projectName] = projectGuid;
+
+                    var relativeProjectPath = Path.Combine(subFolder, Path.GetFileName(csprojFile)).Replace('/', '\\');
+                    solutionContent.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{projectName}\", \"{relativeProjectPath}\", \"{{{projectGuid}}}\"");
+                    solutionContent.AppendLine("EndProject");
+                }
+            }
+
+            solutionContent.AppendLine("Global");
+            solutionContent.AppendLine("\tGlobalSection(SolutionConfigurationPlatforms) = preSolution");
+            solutionContent.AppendLine("\t\tDebug|Any CPU = Debug|Any CPU");
+            solutionContent.AppendLine("\t\tRelease|Any CPU = Release|Any CPU");
+            solutionContent.AppendLine("\tEndGlobalSection");
+            solutionContent.AppendLine("\tGlobalSection(ProjectConfigurationPlatforms) = postSolution");
+
+            foreach (var project in projectGuids)
+            {
+                solutionContent.AppendLine($"\t\t{{{project.Value}}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU");
+                solutionContent.AppendLine($"\t\t{{{project.Value}}}.Debug|Any CPU.Build.0 = Debug|Any CPU");
+                solutionContent.AppendLine($"\t\t{{{project.Value}}}.Release|Any CPU.ActiveCfg = Release|Any CPU");
+                solutionContent.AppendLine($"\t\t{{{project.Value}}}.Release|Any CPU.Build.0 = Release|Any CPU");
+            }
+
+            solutionContent.AppendLine("\tEndGlobalSection");
+            solutionContent.AppendLine("\tGlobalSection(SolutionProperties) = preSolution");
+            solutionContent.AppendLine("\t\tHideSolutionNode = FALSE");
+            solutionContent.AppendLine("\tEndGlobalSection");
+            solutionContent.AppendLine("\tGlobalSection(NestedProjects) = preSolution");
+
+            foreach (var subFolder in subFolders)
+            {
+                var subFolderPath = Path.Combine(servicePath, subFolder);
+                if (!Directory.Exists(subFolderPath)) continue;
+
+                var csprojFiles = Directory.GetFiles(subFolderPath, "*.csproj");
+                foreach (var csprojFile in csprojFiles)
+                {
+                    var projectName = Path.GetFileNameWithoutExtension(csprojFile);
+                    if (projectGuids.ContainsKey(projectName) && solutionFoldersGuids.ContainsKey(subFolder))
+                    {
+                        var projectGuid = projectGuids[projectName];
+                        var folderGuid = solutionFoldersGuids[subFolder];
+
+                        solutionContent.AppendLine($"\t\t{{{projectGuid}}} = {{{folderGuid}}}");
+                    }
+                }
+            }
+            solutionContent.AppendLine("\tEndGlobalSection");
+            solutionContent.AppendLine("EndGlobal");
+
+            await File.WriteAllTextAsync(solutionFilePath, solutionContent.ToString());
+            Logger.LogInformation($"Created solution file: {solutionFilePath}");
+        }
+
+        private async Task AddProjectToSolutionAsync(string solutionPath, string solutionFolder, string projectPath)
+        {
+            if (!File.Exists(solutionPath))
+            {
+                Logger.LogWarning($"Solution file not found: {solutionPath}");
+                return;
+            }
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"sln \"{solutionPath}\" add --solution-folder \"{solutionFolder}\" \"{projectPath}\"",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = Process.Start(psi);
+            string output = await process.StandardOutput.ReadToEndAsync();
+            string error = await process.StandardError.ReadToEndAsync();
+            await process.WaitForExitAsync();
+
+            if (process.ExitCode != 0)
+            {
+                Logger.LogError($"Failed to add project to solution: {error}");
+            }
+            else
+            {
+                Logger.LogInformation($"Project added to solution under '{solutionFolder}': {projectPath}");
+            }
+        }
+
+        private string GetProjectTypeFromName(string projectName)
+        {
+            if (projectName.EndsWith(".Domain.Shared")) return "DomainShared";
+            if (projectName.EndsWith(".Domain")) return "Domain";
+            if (projectName.EndsWith(".Application.Contracts")) return "ApplicationContracts";
+            if (projectName.EndsWith(".Application")) return "Application";
+            if (projectName.EndsWith(".EntityFrameworkCore")) return "EntityFrameworkCore";
+            if (projectName.EndsWith(".HttpApi")) return "HttpApi";
+            if (projectName.EndsWith(".HttpApi.Client")) return "HttpApiClient";
+            if (projectName.EndsWith(".HttpApi.Host")) return "HttpApiHost";
+            if (projectName.EndsWith(".Tests")) return "Tests";
+            return "Unknown";
+        }
+
+        private string GenerateProjectFileContent(string projectName, MicroserviceRequest microservice, string projectType)
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<Project Sdk=\"Microsoft.NET.Sdk\">");
+            content.AppendLine("  <PropertyGroup>");
+            content.AppendLine($"    <TargetFramework>net8.0</TargetFramework>");
+            content.AppendLine($"    <RootNamespace>{projectName}</RootNamespace>");
+            content.AppendLine("  </PropertyGroup>");
+
+            switch (projectType)
+            {
+                case "DomainShared":
+                    content.AppendLine("  <ItemGroup>");
+                    content.AppendLine("    <PackageReference Include=\"Volo.Abp.Core\" Version=\"8.0.0\" />");
+                    content.AppendLine("  </ItemGroup>");
+                    break;
+                case "Domain":
+                    content.AppendLine("  <ItemGroup>");
+                    content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".Domain", ".Domain.Shared")}.csproj\" />");
+                    content.AppendLine("    <PackageReference Include=\"Volo.Abp.Ddd\" Version=\"8.0.0\" />");
+                    content.AppendLine("  </ItemGroup>");
+                    break;
+                case "ApplicationContracts":
+                    content.AppendLine("  <ItemGroup>");
+                    content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".Application.Contracts", ".Domain.Shared")}.csproj\" />");
+                    content.AppendLine("    <PackageReference Include=\"Volo.Abp.Authorization\" Version=\"8.0.0\" />");
+                    content.AppendLine("  </ItemGroup>");
+                    break;
+                case "Application":
+                    content.AppendLine("  <ItemGroup>");
+                    content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".Application", ".Application.Contracts")}.csproj\" />");
+                    content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".Application", ".Domain")}.csproj\" />");
+                    content.AppendLine("    <PackageReference Include=\"Volo.Abp.Ddd\" Version=\"8.0.0\" />");
+                    content.AppendLine("  </ItemGroup>");
+                    break;
+                case "EntityFrameworkCore":
+                    content.AppendLine("  <ItemGroup>");
+                    content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".EntityFrameworkCore", ".Domain")}.csproj\" />");
+                    content.AppendLine("    <PackageReference Include=\"Volo.Abp.EntityFrameworkCore\" Version=\"8.0.0\" />");
+                    content.AppendLine("  </ItemGroup>");
+                    break;
+                case "HttpApi":
+                    content.AppendLine("  <ItemGroup>");
+                    content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".HttpApi", ".Application")}.csproj\" />");
+                    content.AppendLine("    <PackageReference Include=\"Volo.Abp.AspNetCore.Mvc\" Version=\"8.0.0\" />");
+                    content.AppendLine("  </ItemGroup>");
+                    break;
+                case "HttpApiClient":
+                    content.AppendLine("  <ItemGroup>");
+                    content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".HttpApi.Client", ".Application.Contracts")}.csproj\" />");
+                    content.AppendLine("    <PackageReference Include=\"Volo.Abp.Http.Client\" Version=\"8.0.0\" />");
+                    content.AppendLine("  </ItemGroup>");
+                    break;
+                case "Tests":
+                    content.AppendLine("  <ItemGroup>");
+                    content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".Tests", ".Application")}.csproj\" />");
+                    content.AppendLine("    <PackageReference Include=\"Microsoft.NET.Test.Sdk\" Version=\"17.0.0\" />");
+                    content.AppendLine("    <PackageReference Include=\"xunit\" Version=\"2.4.1\" />");
+                    content.AppendLine("  </ItemGroup>");
+                    break;
+            }
+
+            content.AppendLine("</Project>");
+            return content.ToString();
+        }
+
+        private string GenerateHostProjectContent(string projectName, MicroserviceRequest microservice, SolutionGenerationRequest request)
+        {
+            var content = new StringBuilder();
+            content.AppendLine("<Project Sdk=\"Microsoft.NET.Sdk.Web\">");
+            content.AppendLine("  <PropertyGroup>");
+            content.AppendLine($"    <TargetFramework>net8.0</TargetFramework>");
+            content.AppendLine($"    <RootNamespace>{projectName}</RootNamespace>");
+            content.AppendLine("    <OutputType>Exe</OutputType>");
+            content.AppendLine("  </PropertyGroup>");
+            content.AppendLine("  <ItemGroup>");
+            content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".HttpApi.Host", ".HttpApi")}.csproj\" />");
+            content.AppendLine($"    <ProjectReference Include=\"..\\{projectName.Replace(".HttpApi.Host", ".EntityFrameworkCore")}.csproj\" />");
+            content.AppendLine("    <PackageReference Include=\"Volo.Abp.AspNetCore.Mvc\" Version=\"8.0.0\" />");
+            content.AppendLine("  </ItemGroup>");
+            content.AppendLine("</Project>");
+            return content.ToString();
+        }
+
+        private async Task GenerateHostFiles(string subFolderPath, string projectName, SolutionGenerationRequest request, MicroserviceRequest microservice)
+        {
+            var programCsPath = Path.Combine(subFolderPath, "Program.cs");
+            var programContent = new StringBuilder();
+            programContent.AppendLine("using Microsoft.AspNetCore.Builder;");
+            programContent.AppendLine("using Volo.Abp.AspNetCore;");
+            programContent.AppendLine("using Volo.Abp.AspNetCore.Mvc;");
+            programContent.AppendLine();
+            programContent.AppendLine($"namespace {projectName}");
+            programContent.AppendLine("{");
+            programContent.AppendLine("    public class Program");
+            programContent.AppendLine("    {");
+            programContent.AppendLine("        public static void Main(string[] args)");
+            programContent.AppendLine("        {");
+            programContent.AppendLine("            var builder = WebApplication.CreateBuilder(args);");
+            programContent.AppendLine($"            builder.Services.AddApplication<{projectName.Replace(".HttpApi.Host", ".HttpApi") + "Module"}>();");
+            programContent.AppendLine("            var app = builder.Build();");
+            programContent.AppendLine("            app.InitializeApplication();");
+            programContent.AppendLine("            app.Run();");
+            programContent.AppendLine("        }");
+            programContent.AppendLine("    }");
+            programContent.AppendLine("}");
+
+            await File.WriteAllTextAsync(programCsPath, programContent.ToString());
+            Logger.LogInformation($"Created host file: {programCsPath}");
+        }
+
+        private async Task GenerateBasicProjectFiles(string subFolderPath, string projectName, SolutionGenerationRequest request, MicroserviceRequest microservice)
+        {
+            var classFilePath = Path.Combine(subFolderPath, "Placeholder.cs");
+            var classContent = new StringBuilder();
+            classContent.AppendLine($"namespace {projectName}");
+            classContent.AppendLine("{");
+            classContent.AppendLine("    public class Placeholder");
+            classContent.AppendLine("    {");
+            classContent.AppendLine("        // Placeholder class for project structure");
+            classContent.AppendLine("    }");
+            classContent.AppendLine("}");
+
+            await File.WriteAllTextAsync(classFilePath, classContent.ToString());
+            Logger.LogInformation($"Created placeholder file: {classFilePath}");
+        }
+
+        private List<string> GetGeneratedFilesList(string solutionPath)
+        {
+            var files = Directory.GetFiles(solutionPath, "*.*", SearchOption.AllDirectories)
+                .Select(f => Path.GetRelativePath(solutionPath, f))
+                .ToList();
+            return files;
+        }
+    
+
+
+
+
+
+
+
+
+        //private async Task GenerateSharedFilesAsync(string solutionPath, SolutionGenerationRequest request)
+        //{
+        //    var sharedPath = Path.Combine(solutionPath, "shared");
+        //    Directory.CreateDirectory(sharedPath);
+        //    Logger.LogInformation($"Created or verified shared folder: {sharedPath}");
+
+        //    var dockerPath = Path.Combine(solutionPath, "docker");
+        //    Directory.CreateDirectory(dockerPath);
+        //    Logger.LogInformation($"Created or verified docker folder: {dockerPath}");
+
+        //    var readmePath = Path.Combine(solutionPath, "README.md");
+        //    await File.WriteAllTextAsync(readmePath, GenerateReadmeContent(request));
+        //    Logger.LogInformation($"Created README.md: {readmePath}");
+
+        //    var dockerComposePath = Path.Combine(dockerPath, "docker-compose.yml");
+        //    await File.WriteAllTextAsync(dockerComposePath, GenerateDockerComposeContent(request));
+        //    Logger.LogInformation($"Created docker-compose.yml: {dockerComposePath}");
+
+        //    var dockerOverridePath = Path.Combine(dockerPath, "docker-compose.override.yml");
+        //    await File.WriteAllTextAsync(dockerOverridePath, GenerateDockerOverrideContent(request));
+        //    Logger.LogInformation($"Created docker-compose.override.yml: {dockerOverridePath}");
+
+        //    var gitignorePath = Path.Combine(solutionPath, ".gitignore");
+        //    await File.WriteAllTextAsync(gitignorePath, GenerateGitignoreContent());
+        //    Logger.LogInformation($"Created .gitignore: {gitignorePath}");
+
+        //    await GenerateGatewaysAsync(solutionPath, request);
+        //    await GenerateAppsAsync(solutionPath, request);
+        //    await GenerateAuthServerAsync(solutionPath, request);
+        //    await GenerateSharedProjectsAsync(solutionPath, request);
+        //    //  await GenerateBuildScriptsAsync(solutionPath, request);
+
+        //    if (request.SharedInfrastructure?.EnableKubernetes == true)
+        //    {
+        //        await GenerateKubernetesManifestsAsync(solutionPath, request);
+        //    }
+        //}
+
+
+
+
+
+
+        //private async Task GenerateMicroserviceAsync(string solutionPath, SolutionGenerationRequest request, MicroserviceRequest microservice)
+        //{
+        //    Logger.LogInformation($"Generating microservice: {microservice.Name}");
+
+        //    var servicePath = Path.Combine(solutionPath, "services", microservice.Name, "src");
+        //    Directory.CreateDirectory(servicePath);
+        //    Logger.LogInformation($"Created service src path: {servicePath}");
+
+        //    // إنشاء مشاريع الخدمة المصغرة بهيكل ABP
+        //    var projects = new[]
+        //    {
+        //        $"{request.CompanyName}.{microservice.Name}.Domain.Shared",
+        //        $"{request.CompanyName}.{microservice.Name}.Domain",
+        //        $"{request.CompanyName}.{microservice.Name}.Application.Contracts",
+        //        $"{request.CompanyName}.{microservice.Name}.Application",
+        //        $"{request.CompanyName}.{microservice.Name}.EntityFrameworkCore",
+        //        $"{request.CompanyName}.{microservice.Name}.HttpApi",
+        //        $"{request.CompanyName}.{microservice.Name}.HttpApi.Client"
+        //    };
+
+        //    foreach (var project in projects)
+        //    {
+        //        var projectPath = Path.Combine(servicePath, project);
+        //        Directory.CreateDirectory(projectPath);
+        //        Logger.LogInformation($"Created project folder: {projectPath}");
+
+        //        // تحديد نوع المشروع من اسمه
+        //        var projectType = GetProjectTypeFromName(project);
+
+        //        // إنشاء ملف المشروع
+        //        var projectContent = GenerateProjectFileContent(project, microservice, projectType);
+        //        var projectFilePath = Path.Combine(projectPath, $"{project}.csproj");
+        //        await File.WriteAllTextAsync(projectFilePath, projectContent);
+        //        Logger.LogInformation($"Created project file: {projectFilePath}");
+
+        //        // إنشاء ملفات أساسية
+        //        await GenerateBasicProjectFiles(projectPath, project, request, microservice);
+        //    }
+
+        //    // إنشاء Host project
+        //    var hostPath = Path.Combine(solutionPath, "services", microservice.Name, "host");
+        //    var hostProject = $"{request.CompanyName}.{microservice.Name}.HttpApi.Host";
+        //    var hostProjectPath = Path.Combine(hostPath, hostProject);
+        //    Directory.CreateDirectory(hostProjectPath);
+        //    Logger.LogInformation($"Created host project folder: {hostProjectPath}");
+
+        //    var hostContent = GenerateHostProjectContent(hostProject, microservice, request);
+        //    var hostProjectFilePath = Path.Combine(hostProjectPath, $"{hostProject}.csproj");
+        //    await File.WriteAllTextAsync(hostProjectFilePath, hostContent);
+        //    Logger.LogInformation($"Created host project file: {hostProjectFilePath}");
+
+        //    await GenerateHostFiles(hostProjectPath, hostProject, request, microservice);
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public async Task<SolutionGenerationResponse> GetGenerationStatusAsync(Guid id)
         {
@@ -266,182 +792,9 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
 
         #region Helper Methods
 
-        private async Task GenerateSolutionFileAsync(string solutionPath, SolutionGenerationRequest request)
-        {
-            Logger.LogInformation($"Creating solution file for: {request.SolutionName}");
+    
 
-            var solutionContent = GenerateSolutionFileContent(request);
-            var solutionFilePath = Path.Combine(solutionPath, $"{request.SolutionName}.sln");
-            await File.WriteAllTextAsync(solutionFilePath, solutionContent);
-
-            Logger.LogInformation($"Created solution file: {solutionFilePath}");
-        }
-
-        private async Task CreateProjectStructureAsync(string solutionPath, SolutionGenerationRequest request)
-        {
-            Logger.LogInformation($"Creating project structure at: {solutionPath}");
-
-            // إنشاء هيكل ABP Microservices
-            var folders = new[]
-            {
-                // Main folders
-                "services",
-                "gateways",
-                "apps",
-                "shared",
-
-                // Infrastructure
-                "docker",
-                "k8s",
-                "build",
-                "docs",
-
-                // Testing
-                "test"
-            };
-
-            foreach (var folder in folders)
-            {
-                var folderPath = Path.Combine(solutionPath, folder);
-                Directory.CreateDirectory(folderPath);
-                Logger.LogInformation($"Created folder: {folderPath}");
-            }
-
-            // Create services subfolders
-            foreach (var service in request.Microservices)
-            {
-                var servicePath = Path.Combine(solutionPath, "services", service.Name);
-                Directory.CreateDirectory(servicePath);
-                Logger.LogInformation($"Created service folder: {servicePath}");
-
-                // Create service structure
-                var serviceSubFolders = new[] { "src", "test", "host" };
-                foreach (var subFolder in serviceSubFolders)
-                {
-                    var subFolderPath = Path.Combine(servicePath, subFolder);
-                    Directory.CreateDirectory(subFolderPath);
-                    Logger.LogInformation($"Created service subfolder: {subFolderPath}");
-                }
-            }
-
-            // Create gateways subfolders
-            foreach (var gateway in request.Gateways)
-            {
-                var gatewayPath = Path.Combine(solutionPath, "gateways", gateway.Name);
-                Directory.CreateDirectory(gatewayPath);
-                Logger.LogInformation($"Created gateway folder: {gatewayPath}");
-            }
-
-            // Create apps subfolders
-            foreach (var app in request.Apps)
-            {
-                var appPath = Path.Combine(solutionPath, "apps", app.Name);
-                Directory.CreateDirectory(appPath);
-                Logger.LogInformation($"Created app folder: {appPath}");
-            }
-
-            // Create auth server folder
-            var authPath = Path.Combine(solutionPath, "services", request.AuthService.Name);
-            Directory.CreateDirectory(authPath);
-            Logger.LogInformation($"Created auth server folder: {authPath}");
-
-            await Task.CompletedTask;
-        }
-
-        private async Task GenerateMicroserviceAsync(string solutionPath, SolutionGenerationRequest request, MicroserviceRequest microservice)
-        {
-            Logger.LogInformation($"Generating microservice: {microservice.Name}");
-
-            var servicePath = Path.Combine(solutionPath, "services", microservice.Name, "src");
-            Directory.CreateDirectory(servicePath);
-            Logger.LogInformation($"Created service src path: {servicePath}");
-
-            // إنشاء مشاريع الخدمة المصغرة بهيكل ABP
-            var projects = new[]
-            {
-                $"{request.CompanyName}.{microservice.Name}.Domain.Shared",
-                $"{request.CompanyName}.{microservice.Name}.Domain",
-                $"{request.CompanyName}.{microservice.Name}.Application.Contracts",
-                $"{request.CompanyName}.{microservice.Name}.Application",
-                $"{request.CompanyName}.{microservice.Name}.EntityFrameworkCore",
-                $"{request.CompanyName}.{microservice.Name}.HttpApi",
-                $"{request.CompanyName}.{microservice.Name}.HttpApi.Client"
-            };
-
-            foreach (var project in projects)
-            {
-                var projectPath = Path.Combine(servicePath, project);
-                Directory.CreateDirectory(projectPath);
-                Logger.LogInformation($"Created project folder: {projectPath}");
-
-                // تحديد نوع المشروع من اسمه
-                var projectType = GetProjectTypeFromName(project);
-
-                // إنشاء ملف المشروع
-                var projectContent = GenerateProjectFileContent(project, microservice, projectType);
-                var projectFilePath = Path.Combine(projectPath, $"{project}.csproj");
-                await File.WriteAllTextAsync(projectFilePath, projectContent);
-                Logger.LogInformation($"Created project file: {projectFilePath}");
-
-                // إنشاء ملفات أساسية
-                await GenerateBasicProjectFiles(projectPath, project, request, microservice);
-            }
-
-            // إنشاء Host project
-            var hostPath = Path.Combine(solutionPath, "services", microservice.Name, "host");
-            var hostProject = $"{request.CompanyName}.{microservice.Name}.HttpApi.Host";
-            var hostProjectPath = Path.Combine(hostPath, hostProject);
-            Directory.CreateDirectory(hostProjectPath);
-            Logger.LogInformation($"Created host project folder: {hostProjectPath}");
-
-            var hostContent = GenerateHostProjectContent(hostProject, microservice, request);
-            var hostProjectFilePath = Path.Combine(hostProjectPath, $"{hostProject}.csproj");
-            await File.WriteAllTextAsync(hostProjectFilePath, hostContent);
-            Logger.LogInformation($"Created host project file: {hostProjectFilePath}");
-
-            await GenerateHostFiles(hostProjectPath, hostProject, request, microservice);
-        }
-
-        private async Task GenerateSharedFilesAsync(string solutionPath, SolutionGenerationRequest request)
-        {
-            // README.md
-            var readmeContent = GenerateReadmeContent(request);
-            await File.WriteAllTextAsync(Path.Combine(solutionPath, "README.md"), readmeContent);
-
-            // docker-compose.yml
-            var dockerComposeContent = GenerateDockerComposeContent(request);
-            await File.WriteAllTextAsync(Path.Combine(solutionPath, "docker", "docker-compose.yml"), dockerComposeContent);
-
-            // docker-compose.override.yml
-            var dockerOverrideContent = GenerateDockerOverrideContent(request);
-            await File.WriteAllTextAsync(Path.Combine(solutionPath, "docker", "docker-compose.override.yml"), dockerOverrideContent);
-
-            // .gitignore
-            var gitignoreContent = GenerateGitignoreContent();
-            await File.WriteAllTextAsync(Path.Combine(solutionPath, ".gitignore"), gitignoreContent);
-
-            // Generate gateways
-            await GenerateGatewaysAsync(solutionPath, request);
-
-            // Generate apps
-            await GenerateAppsAsync(solutionPath, request);
-
-            // Generate auth server
-            await GenerateAuthServerAsync(solutionPath, request);
-
-            // Generate shared projects
-            await GenerateSharedProjectsAsync(solutionPath, request);
-
-            // Generate build scripts
-            await GenerateBuildScriptsAsync(solutionPath, request);
-
-            // Generate Kubernetes manifests if enabled
-            if (request.SharedInfrastructure.EnableKubernetes)
-            {
-                await GenerateKubernetesManifestsAsync(solutionPath, request);
-            }
-        }
-
+    
         private async Task<string> CreateZipPackageAsync(string solutionPath, string solutionName)
         {
             var zipPath = Path.Combine(_outputPath, $"{solutionName}_{DateTime.Now:yyyyMMdd_HHmmss}.zip");
@@ -455,120 +808,49 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
             return zipPath;
         }
 
-        private List<string> GetGeneratedFilesList(string solutionPath)
-        {
-            var files = new List<string>();
+        //private List<string> GetGeneratedFilesList(string solutionPath)
+        //{
+        //    var files = new List<string>();
 
-            if (Directory.Exists(solutionPath))
-            {
-                files.AddRange(Directory.GetFiles(solutionPath, "*", SearchOption.AllDirectories)
-                    .Select(f => Path.GetRelativePath(solutionPath, f)));
-            }
+        //    if (Directory.Exists(solutionPath))
+        //    {
+        //        files.AddRange(Directory.GetFiles(solutionPath, "*", SearchOption.AllDirectories)
+        //            .Select(f => Path.GetRelativePath(solutionPath, f)));
+        //    }
 
-            return files;
-        }
+        //    return files;
+        //}
 
         #endregion
 
         #region Content Generators
 
-        private string GenerateSolutionFileContent(SolutionGenerationRequest request)
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("Microsoft Visual Studio Solution File, Format Version 12.00");
-            sb.AppendLine("# Visual Studio Version 17");
-            sb.AppendLine("VisualStudioVersion = 17.0.31903.59");
-            sb.AppendLine("MinimumVisualStudioVersion = 10.0.40219.1");
-            sb.AppendLine();
 
-            // إضافة مشاريع الخدمات المصغرة
-            foreach (var microservice in request.Microservices)
-            {
-                sb.AppendLine($"# {microservice.Name} Microservice");
-                var projects = new[]
-                {
-                    $"{request.CompanyName}.{microservice.Name}.Domain.Shared",
-                    $"{request.CompanyName}.{microservice.Name}.Domain",
-                    $"{request.CompanyName}.{microservice.Name}.Application.Contracts",
-                    $"{request.CompanyName}.{microservice.Name}.Application",
-                    $"{request.CompanyName}.{microservice.Name}.EntityFrameworkCore",
-                    $"{request.CompanyName}.{microservice.Name}.HttpApi",
-                    $"{request.CompanyName}.{microservice.Name}.HttpApi.Client"
-                };
 
-                foreach (var project in projects)
-                {
-                    var projectGuid = Guid.NewGuid().ToString().ToUpper();
-                    var projectPath = $"services\\{microservice.Name}\\src\\{project}\\{project}.csproj";
-                    sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{project}\", \"{projectPath}\", \"{{{projectGuid}}}\"");
-                    sb.AppendLine("EndProject");
-                }
+ 
 
-                // إضافة Host project
-                var hostProject = $"{request.CompanyName}.{microservice.Name}.HttpApi.Host";
-                var hostGuid = Guid.NewGuid().ToString().ToUpper();
-                var hostPath = $"services\\{microservice.Name}\\host\\{hostProject}\\{hostProject}.csproj";
-                sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{hostProject}\", \"{hostPath}\", \"{{{hostGuid}}}\"");
-                sb.AppendLine("EndProject");
-                sb.AppendLine();
-            }
 
-            // إضافة مشاريع Gateways
-            foreach (var gateway in request.Gateways)
-            {
-                var gatewayProject = $"{request.CompanyName}.{gateway.Name}";
-                var gatewayGuid = Guid.NewGuid().ToString().ToUpper();
-                var gatewayPath = $"gateways\\{gateway.Name}\\{gatewayProject}.csproj";
-                sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{gatewayProject}\", \"{gatewayPath}\", \"{{{gatewayGuid}}}\"");
-                sb.AppendLine("EndProject");
-            }
 
-            // إضافة مشاريع Apps
-            foreach (var app in request.Apps)
-            {
-                var appProject = $"{request.CompanyName}.{app.Name}";
-                var appGuid = Guid.NewGuid().ToString().ToUpper();
-                var appPath = $"apps\\{app.Name}\\{appProject}.csproj";
-                sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{appProject}\", \"{appPath}\", \"{{{appGuid}}}\"");
-                sb.AppendLine("EndProject");
-            }
 
-            // إضافة Auth Server
-            var authProject = $"{request.CompanyName}.{request.AuthService.Name}";
-            var authGuid = Guid.NewGuid().ToString().ToUpper();
-            var authPath = $"services\\{request.AuthService.Name}\\{authProject}.csproj";
-            sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{authProject}\", \"{authPath}\", \"{{{authGuid}}}\"");
-            sb.AppendLine("EndProject");
 
-            // إضافة Shared projects
-            var sharedHosting = $"{request.CompanyName}.Shared.Hosting";
-            var sharedLocalization = $"{request.CompanyName}.Shared.Localization";
-            var sharedHostingGuid = Guid.NewGuid().ToString().ToUpper();
-            var sharedLocalizationGuid = Guid.NewGuid().ToString().ToUpper();
 
-            sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{sharedHosting}\", \"shared\\{sharedHosting}\\{sharedHosting}.csproj\", \"{{{sharedHostingGuid}}}\"");
-            sb.AppendLine("EndProject");
-            sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{sharedLocalization}\", \"shared\\{sharedLocalization}\\{sharedLocalization}.csproj\", \"{{{sharedLocalizationGuid}}}\"");
-            sb.AppendLine("EndProject");
 
-            return sb.ToString();
-        }
 
-        private string GenerateProjectFileContent(string projectName, MicroserviceRequest microservice, string projectType = "Domain.Shared")
-        {
-            return projectType switch
-            {
-                "Domain.Shared" => GenerateDomainSharedProject(projectName, microservice),
-                "Domain" => GenerateDomainProject(projectName, microservice),
-                "Application.Contracts" => GenerateApplicationContractsProject(projectName, microservice),
-                "Application" => GenerateApplicationProject(projectName, microservice),
-                "EntityFrameworkCore" => GenerateEntityFrameworkCoreProject(projectName, microservice),
-                "HttpApi" => GenerateHttpApiProject(projectName, microservice),
-                "HttpApi.Client" => GenerateHttpApiClientProject(projectName, microservice),
-                "HttpApi.Host" => GenerateHttpApiHostProject(projectName, microservice),
-                _ => GenerateDomainSharedProject(projectName, microservice)
-            };
-        }
+        //private string GenerateProjectFileContent(string projectName, MicroserviceRequest microservice, string projectType = "Domain.Shared")
+        //{
+        //    return projectType switch
+        //    {
+        //        "Domain.Shared" => GenerateDomainSharedProject(projectName, microservice),
+        //        "Domain" => GenerateDomainProject(projectName, microservice),
+        //        "Application.Contracts" => GenerateApplicationContractsProject(projectName, microservice),
+        //        "Application" => GenerateApplicationProject(projectName, microservice),
+        //        "EntityFrameworkCore" => GenerateEntityFrameworkCoreProject(projectName, microservice),
+        //        "HttpApi" => GenerateHttpApiProject(projectName, microservice),
+        //        "HttpApi.Client" => GenerateHttpApiClientProject(projectName, microservice),
+        //        "HttpApi.Host" => GenerateHttpApiHostProject(projectName, microservice),
+        //        _ => GenerateDomainSharedProject(projectName, microservice)
+        //    };
+        //}
 
         private string GenerateDomainSharedProject(string projectName, MicroserviceRequest microservice)
         {
@@ -725,27 +1007,27 @@ namespace AbpMicroservicesGenerator.SolutionGeneration
 </Project>";
         }
 
-        private string GetProjectTypeFromName(string projectName)
-        {
-            if (projectName.EndsWith(".Domain.Shared"))
-                return "Domain.Shared";
-            if (projectName.EndsWith(".Domain"))
-                return "Domain";
-            if (projectName.EndsWith(".Application.Contracts"))
-                return "Application.Contracts";
-            if (projectName.EndsWith(".Application"))
-                return "Application";
-            if (projectName.EndsWith(".EntityFrameworkCore"))
-                return "EntityFrameworkCore";
-            if (projectName.EndsWith(".HttpApi.Client"))
-                return "HttpApi.Client";
-            if (projectName.EndsWith(".HttpApi.Host"))
-                return "HttpApi.Host";
-            if (projectName.EndsWith(".HttpApi"))
-                return "HttpApi";
+        //private string GetProjectTypeFromName(string projectName)
+        //{
+        //    if (projectName.EndsWith(".Domain.Shared"))
+        //        return "Domain.Shared";
+        //    if (projectName.EndsWith(".Domain"))
+        //        return "Domain";
+        //    if (projectName.EndsWith(".Application.Contracts"))
+        //        return "Application.Contracts";
+        //    if (projectName.EndsWith(".Application"))
+        //        return "Application";
+        //    if (projectName.EndsWith(".EntityFrameworkCore"))
+        //        return "EntityFrameworkCore";
+        //    if (projectName.EndsWith(".HttpApi.Client"))
+        //        return "HttpApi.Client";
+        //    if (projectName.EndsWith(".HttpApi.Host"))
+        //        return "HttpApi.Host";
+        //    if (projectName.EndsWith(".HttpApi"))
+        //        return "HttpApi";
 
-            return "Domain.Shared"; // Default
-        }
+        //    return "Domain.Shared"; // Default
+        //}
 
         private string GenerateHttpApiClientProject(string projectName, MicroserviceRequest microservice)
         {
@@ -1205,77 +1487,104 @@ node_modules/
         private async Task GenerateSharedProjectsAsync(string solutionPath, SolutionGenerationRequest request)
         {
             var sharedPath = Path.Combine(solutionPath, "shared");
+            Directory.CreateDirectory(sharedPath);
+            Logger.LogInformation("Created shared directory: {SharedPath}", sharedPath);
 
-            // Create shared hosting project
-            var hostingProject = $"{request.CompanyName}.Shared.Hosting";
-            Directory.CreateDirectory(Path.Combine(sharedPath, hostingProject));
-
-            var hostingContent = GenerateSharedHostingContent(hostingProject, request);
-            await File.WriteAllTextAsync(Path.Combine(sharedPath, hostingProject, $"{hostingProject}.csproj"), hostingContent);
-
-            // Create shared localization project
-            var localizationProject = $"{request.CompanyName}.Shared.Localization";
-            Directory.CreateDirectory(Path.Combine(sharedPath, localizationProject));
-
-            var localizationContent = GenerateSharedLocalizationContent(localizationProject, request);
-            await File.WriteAllTextAsync(Path.Combine(sharedPath, localizationProject, $"{localizationProject}.csproj"), localizationContent);
-        }
-
-        private async Task GenerateBuildScriptsAsync(string solutionPath, SolutionGenerationRequest request)
-        {
-            var buildPath = Path.Combine(solutionPath, "build");
-
-            // Create build scripts
-            var buildScript = GenerateBuildScript(request);
-            await File.WriteAllTextAsync(Path.Combine(buildPath, "build.ps1"), buildScript);
-
-            var buildShScript = GenerateBuildShScript(request);
-            await File.WriteAllTextAsync(Path.Combine(buildPath, "build.sh"), buildShScript);
-        }
-
-        private async Task GenerateKubernetesManifestsAsync(string solutionPath, SolutionGenerationRequest request)
-        {
-            var k8sPath = Path.Combine(solutionPath, "k8s");
-
-            // Generate namespace
-            var namespaceContent = GenerateK8sNamespace(request);
-            await File.WriteAllTextAsync(Path.Combine(k8sPath, "namespace.yaml"), namespaceContent);
-
-            // Generate services manifests
-            foreach (var service in request.Microservices)
+            // Shared projects
+            var sharedProjects = new[]
             {
-                var serviceManifest = GenerateK8sServiceManifest(service, request);
-                await File.WriteAllTextAsync(Path.Combine(k8sPath, $"{service.Name.ToLower()}-service.yaml"), serviceManifest);
+        $"{request.CompanyName}.Shared",
+        $"{request.CompanyName}.Shared.Hosting",
+        $"{request.CompanyName}.Shared.Localization"
+    };
+
+            foreach (var project in sharedProjects)
+            {
+                var projectPath = Path.Combine(sharedPath, project);
+                Directory.CreateDirectory(projectPath);
+                Logger.LogInformation("Created shared project folder: {ProjectPath}", projectPath);
+
+                // Generate .csproj file
+                var projectContent = project switch
+                {
+                    var p when p.EndsWith(".Shared") => GenerateSharedContent(p, request),
+                    var p when p.EndsWith(".Shared.Hosting") => GenerateSharedHostingContent(p, request),
+                    var p when p.EndsWith(".Shared.Localization") => GenerateSharedLocalizationContent(p, request),
+                    _ => throw new ArgumentException($"Unknown shared project type: {project}")
+                };
+                var projectFilePath = Path.Combine(projectPath, $"{project}.csproj");
+                await File.WriteAllTextAsync(projectFilePath, projectContent);
+                Logger.LogInformation("Created shared project file: {ProjectFilePath}", projectFilePath);
             }
+        }
+        private string GenerateSharedContent(string projectName, SolutionGenerationRequest request)
+        {
+            return $@"<Project Sdk=""Microsoft.NET.Sdk"">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include=""Volo.Abp.Core"" Version=""4.2.0"" />
+  </ItemGroup>
+</Project>";
+        }
+
+        private string GenerateSharedHostingContent(string projectName, SolutionGenerationRequest request)
+        {
+            return $@"<Project Sdk=""Microsoft.NET.Sdk"">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include=""Volo.Abp.AspNetCore.Serilog"" Version=""4.2.0"" />
+    <ProjectReference Include=""..\\{request.CompanyName}.Shared\\{request.CompanyName}.Shared.csproj"" />
+  </ItemGroup>
+</Project>";
+        }
+
+        private string GenerateSharedLocalizationContent(string projectName, SolutionGenerationRequest request)
+        {
+            return $@"<Project Sdk=""Microsoft.NET.Sdk"">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include=""Volo.Abp.Localization"" Version=""4.2.0"" />
+    <ProjectReference Include=""..\\{request.CompanyName}.Shared\\{request.CompanyName}.Shared.csproj"" />
+  </ItemGroup>
+</Project>";
         }
 
         // Placeholder methods for content generation
-        private async Task GenerateBasicProjectFiles(string projectPath, string projectName, SolutionGenerationRequest request, MicroserviceRequest microservice)
-        {
-            // Create basic class files based on project type
-            await Task.CompletedTask;
-        }
+        //private async Task GenerateBasicProjectFiles(string projectPath, string projectName, SolutionGenerationRequest request, MicroserviceRequest microservice)
+        //{
+        //    // Create basic class files based on project type
+        //    await Task.CompletedTask;
+        //}
 
-        private async Task GenerateHostFiles(string hostPath, string projectName, SolutionGenerationRequest request, MicroserviceRequest microservice)
-        {
-            // Create Program.cs
-            var programContent = GenerateProgramCs(projectName, request, microservice);
-            await File.WriteAllTextAsync(Path.Combine(hostPath, "Program.cs"), programContent);
+        //private async Task GenerateHostFiles(string hostPath, string projectName, SolutionGenerationRequest request, MicroserviceRequest microservice)
+        //{
+        //    // Create Program.cs
+        //    var programContent = GenerateProgramCs(projectName, request, microservice);
+        //    await File.WriteAllTextAsync(Path.Combine(hostPath, "Program.cs"), programContent);
 
-            // Create appsettings.json
-            var appSettingsContent = GenerateAppSettings(projectName, request, microservice);
-            await File.WriteAllTextAsync(Path.Combine(hostPath, "appsettings.json"), appSettingsContent);
+        //    // Create appsettings.json
+        //    var appSettingsContent = GenerateAppSettings(projectName, request, microservice);
+        //    await File.WriteAllTextAsync(Path.Combine(hostPath, "appsettings.json"), appSettingsContent);
 
-            // Create appsettings.Development.json
-            var devAppSettingsContent = GenerateDevAppSettings(projectName, request, microservice);
-            await File.WriteAllTextAsync(Path.Combine(hostPath, "appsettings.Development.json"), devAppSettingsContent);
+        //    // Create appsettings.Development.json
+        //    var devAppSettingsContent = GenerateDevAppSettings(projectName, request, microservice);
+        //    await File.WriteAllTextAsync(Path.Combine(hostPath, "appsettings.Development.json"), devAppSettingsContent);
 
-            // Create launchSettings.json
-            var launchSettingsContent = GenerateLaunchSettings(projectName, request, microservice);
-            var propertiesPath = Path.Combine(hostPath, "Properties");
-            Directory.CreateDirectory(propertiesPath);
-            await File.WriteAllTextAsync(Path.Combine(propertiesPath, "launchSettings.json"), launchSettingsContent);
-        }
+        //    // Create launchSettings.json
+        //    var launchSettingsContent = GenerateLaunchSettings(projectName, request, microservice);
+        //    var propertiesPath = Path.Combine(hostPath, "Properties");
+        //    Directory.CreateDirectory(propertiesPath);
+        //    await File.WriteAllTextAsync(Path.Combine(propertiesPath, "launchSettings.json"), launchSettingsContent);
+        //}
 
         private async Task GenerateGatewayConfigFiles(string gatewayPath, string projectName, GatewayRequest gateway, SolutionGenerationRequest request)
         {
@@ -1296,10 +1605,10 @@ node_modules/
         }
 
         // Content generation methods
-        private string GenerateHostProjectContent(string projectName, MicroserviceRequest microservice, SolutionGenerationRequest request)
-        {
-            return GenerateProjectFileContent(projectName, microservice);
-        }
+        //private string GenerateHostProjectContent(string projectName, MicroserviceRequest microservice, SolutionGenerationRequest request)
+        //{
+        //    return GenerateProjectFileContent(projectName, microservice);
+        //}
 
         private string GenerateDockerOverrideContent(SolutionGenerationRequest request)
         {
@@ -1461,29 +1770,7 @@ node_modules/
 </Project>";
         }
 
-        private string GenerateSharedHostingContent(string projectName, SolutionGenerationRequest request)
-        {
-            return $@"<Project Sdk=""Microsoft.NET.Sdk"">
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include=""Volo.Abp.AspNetCore.Serilog"" Version=""4.2.0"" />
-  </ItemGroup>
-</Project>";
-        }
 
-        private string GenerateSharedLocalizationContent(string projectName, SolutionGenerationRequest request)
-        {
-            return $@"<Project Sdk=""Microsoft.NET.Sdk"">
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include=""Volo.Abp.Localization"" Version=""4.2.0"" />
-  </ItemGroup>
-</Project>";
-        }
 
         private string GenerateBuildScript(SolutionGenerationRequest request)
         {
@@ -1768,6 +2055,264 @@ public static class MauiProgram
         return builder.Build();
     }}
 }}";
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //private async Task GenerateSharedFilesAsync(string solutionPath, SolutionGenerationRequest request)
+        //{
+        //    // README.md
+        //    var readmeContent = GenerateReadmeContent(request);
+        //    await File.WriteAllTextAsync(Path.Combine(solutionPath, "README.md"), readmeContent);
+
+        //    // docker-compose.yml
+        //    var dockerComposeContent = GenerateDockerComposeContent(request);
+        //    await File.WriteAllTextAsync(Path.Combine(solutionPath, "docker", "docker-compose.yml"), dockerComposeContent);
+
+        //    // docker-compose.override.yml
+        //    var dockerOverrideContent = GenerateDockerOverrideContent(request);
+        //    await File.WriteAllTextAsync(Path.Combine(solutionPath, "docker", "docker-compose.override.yml"), dockerOverrideContent);
+
+        //    // .gitignore
+        //    var gitignoreContent = GenerateGitignoreContent();
+        //    await File.WriteAllTextAsync(Path.Combine(solutionPath, ".gitignore"), gitignoreContent);
+
+        //    // Generate gateways
+        //    await GenerateGatewaysAsync(solutionPath, request);
+
+        //    // Generate apps
+        //    await GenerateAppsAsync(solutionPath, request);
+
+        //    // Generate auth server
+        //    await GenerateAuthServerAsync(solutionPath, request);
+
+        //    // Generate shared projects
+        //    await GenerateSharedProjectsAsync(solutionPath, request);
+
+        //    // Generate build scripts
+        //    await GenerateBuildScriptsAsync(solutionPath, request);
+
+        //    // Generate Kubernetes manifests if enabled
+        //    if (request.SharedInfrastructure.EnableKubernetes)
+        //    {
+        //        await GenerateKubernetesManifestsAsync(solutionPath, request);
+        //    }
+        //}
+
+
+        //private async Task GenerateSolutionFileAsync(string solutionPath, SolutionGenerationRequest request)
+        //{
+        //    Logger.LogInformation($"Creating solution file for: {request.SolutionName}");
+
+        //    var solutionContent = GenerateSolutionFileContent(request);
+        //    var solutionFilePath = Path.Combine(solutionPath, $"{request.SolutionName}.sln");
+        //    await File.WriteAllTextAsync(solutionFilePath, solutionContent);
+
+        //    Logger.LogInformation($"Created solution file: {solutionFilePath}");
+        //}
+
+        //private string GenerateSolutionFileContent(SolutionGenerationRequest request)
+        //{
+        //    var sb = new StringBuilder();
+        //    sb.AppendLine("Microsoft Visual Studio Solution File, Format Version 12.00");
+        //    sb.AppendLine("# Visual Studio Version 17");
+        //    sb.AppendLine("VisualStudioVersion = 17.0.31903.59");
+        //    sb.AppendLine("MinimumVisualStudioVersion = 10.0.40219.1");
+        //    sb.AppendLine();
+
+        //    // إضافة مشاريع الخدمات المصغرة
+        //    foreach (var microservice in request.Microservices)
+        //    {
+        //        sb.AppendLine($"# {microservice.Name} Microservice");
+        //        var projects = new[]
+        //        {
+        //            $"{request.CompanyName}.{microservice.Name}.Domain.Shared",
+        //            $"{request.CompanyName}.{microservice.Name}.Domain",
+        //            $"{request.CompanyName}.{microservice.Name}.Application.Contracts",
+        //            $"{request.CompanyName}.{microservice.Name}.Application",
+        //            $"{request.CompanyName}.{microservice.Name}.EntityFrameworkCore",
+        //            $"{request.CompanyName}.{microservice.Name}.HttpApi",
+        //            $"{request.CompanyName}.{microservice.Name}.HttpApi.Client"
+        //        };
+
+        //        foreach (var project in projects)
+        //        {
+        //            var projectGuid = Guid.NewGuid().ToString().ToUpper();
+        //            var projectPath = $"services\\{microservice.Name}\\src\\{project}\\{project}.csproj";
+        //            sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{project}\", \"{projectPath}\", \"{{{projectGuid}}}\"");
+        //            sb.AppendLine("EndProject");
+        //        }
+
+        //        // إضافة Host project
+        //        var hostProject = $"{request.CompanyName}.{microservice.Name}.HttpApi.Host";
+        //        var hostGuid = Guid.NewGuid().ToString().ToUpper();
+        //        var hostPath = $"services\\{microservice.Name}\\host\\{hostProject}\\{hostProject}.csproj";
+        //        sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{hostProject}\", \"{hostPath}\", \"{{{hostGuid}}}\"");
+        //        sb.AppendLine("EndProject");
+        //        sb.AppendLine();
+        //    }
+
+        //    // إضافة مشاريع Gateways
+        //    foreach (var gateway in request.Gateways)
+        //    {
+        //        var gatewayProject = $"{request.CompanyName}.{gateway.Name}";
+        //        var gatewayGuid = Guid.NewGuid().ToString().ToUpper();
+        //        var gatewayPath = $"gateways\\{gateway.Name}\\{gatewayProject}.csproj";
+        //        sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{gatewayProject}\", \"{gatewayPath}\", \"{{{gatewayGuid}}}\"");
+        //        sb.AppendLine("EndProject");
+        //    }
+
+        //    // إضافة مشاريع Apps
+        //    foreach (var app in request.Apps)
+        //    {
+        //        var appProject = $"{request.CompanyName}.{app.Name}";
+        //        var appGuid = Guid.NewGuid().ToString().ToUpper();
+        //        var appPath = $"apps\\{app.Name}\\{appProject}.csproj";
+        //        sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{appProject}\", \"{appPath}\", \"{{{appGuid}}}\"");
+        //        sb.AppendLine("EndProject");
+        //    }
+
+        //    // إضافة Auth Server
+        //    var authProject = $"{request.CompanyName}.{request.AuthService.Name}";
+        //    var authGuid = Guid.NewGuid().ToString().ToUpper();
+        //    var authPath = $"services\\{request.AuthService.Name}\\{authProject}.csproj";
+        //    sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{authProject}\", \"{authPath}\", \"{{{authGuid}}}\"");
+        //    sb.AppendLine("EndProject");
+
+        //    // إضافة Shared projects
+        //    var sharedHosting = $"{request.CompanyName}.Shared.Hosting";
+        //    var sharedLocalization = $"{request.CompanyName}.Shared.Localization";
+        //    var sharedHostingGuid = Guid.NewGuid().ToString().ToUpper();
+        //    var sharedLocalizationGuid = Guid.NewGuid().ToString().ToUpper();
+
+        //    sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{sharedHosting}\", \"shared\\{sharedHosting}\\{sharedHosting}.csproj\", \"{{{sharedHostingGuid}}}\"");
+        //    sb.AppendLine("EndProject");
+        //    sb.AppendLine($"Project(\"{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}\") = \"{sharedLocalization}\", \"shared\\{sharedLocalization}\\{sharedLocalization}.csproj\", \"{{{sharedLocalizationGuid}}}\"");
+        //    sb.AppendLine("EndProject");
+
+        //    return sb.ToString();
+        //}
+
+        //private async Task GenerateSharedProjectsAsync(string solutionPath, SolutionGenerationRequest request)
+        //{
+        //    var sharedPath = Path.Combine(solutionPath, "shared");
+
+        //    // Create shared hosting project
+        //    var hostingProject = $"{request.CompanyName}.Shared.Hosting";
+        //    Directory.CreateDirectory(Path.Combine(sharedPath, hostingProject));
+
+        //    var hostingContent = GenerateSharedHostingContent(hostingProject, request);
+        //    await File.WriteAllTextAsync(Path.Combine(sharedPath, hostingProject, $"{hostingProject}.csproj"), hostingContent);
+
+        //    // Create shared localization project
+        //    var localizationProject = $"{request.CompanyName}.Shared.Localization";
+        //    Directory.CreateDirectory(Path.Combine(sharedPath, localizationProject));
+
+        //    var localizationContent = GenerateSharedLocalizationContent(localizationProject, request);
+        //    await File.WriteAllTextAsync(Path.Combine(sharedPath, localizationProject, $"{localizationProject}.csproj"), localizationContent);
+        //}
+
+
+
+        //        private string GenerateSharedHostingContent(string projectName, SolutionGenerationRequest request)
+        //        {
+        //            return $@"<Project Sdk=""Microsoft.NET.Sdk"">
+        //  <PropertyGroup>
+        //    <TargetFramework>net9.0</TargetFramework>
+        //  </PropertyGroup>
+        //  <ItemGroup>
+        //    <PackageReference Include=""Volo.Abp.AspNetCore.Serilog"" Version=""4.2.0"" />
+        //  </ItemGroup>
+        //</Project>";
+        //        }
+
+        //        private string GenerateSharedLocalizationContent(string projectName, SolutionGenerationRequest request)
+        //        {
+        //            return $@"<Project Sdk=""Microsoft.NET.Sdk"">
+        //  <PropertyGroup>
+        //    <TargetFramework>net9.0</TargetFramework>
+        //  </PropertyGroup>
+        //  <ItemGroup>
+        //    <PackageReference Include=""Volo.Abp.Localization"" Version=""4.2.0"" />
+        //  </ItemGroup>
+        //</Project>";
+        //        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region not for now
+        private async Task GenerateBuildScriptsAsync(string solutionPath, SolutionGenerationRequest request)
+        {
+            var buildPath = Path.Combine(solutionPath, "build");
+            Directory.CreateDirectory(buildPath); // Ensure build directory exists
+            // Create build scripts
+            var buildScript = GenerateBuildScript(request);
+            await File.WriteAllTextAsync(Path.Combine(buildPath, "build.ps1"), buildScript);
+
+            var buildShScript = GenerateBuildShScript(request);
+            await File.WriteAllTextAsync(Path.Combine(buildPath, "build.sh"), buildShScript);
+        }
+
+        private async Task GenerateKubernetesManifestsAsync(string solutionPath, SolutionGenerationRequest request)
+        {
+            var k8sPath = Path.Combine(solutionPath, "k8s");
+
+            // Generate namespace
+            var namespaceContent = GenerateK8sNamespace(request);
+            await File.WriteAllTextAsync(Path.Combine(k8sPath, "namespace.yaml"), namespaceContent);
+
+            // Generate services manifests
+            foreach (var service in request.Microservices)
+            {
+                var serviceManifest = GenerateK8sServiceManifest(service, request);
+                await File.WriteAllTextAsync(Path.Combine(k8sPath, $"{service.Name.ToLower()}-service.yaml"), serviceManifest);
+            }
         }
 
         #endregion
