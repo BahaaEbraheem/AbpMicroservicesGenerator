@@ -1,0 +1,16 @@
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.csproj.AssemblyReference.cache
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.AssemblyInfoInputs.cache
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.AssemblyInfo.cs
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.csproj.CoreCompileInputs.cache
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.sourcelink.json
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\bin\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.deps.json
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\bin\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.dll
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\bin\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.pdb
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\bin\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.dll
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\bin\Debug\net9.0\AbpMicroservicesGenerator.Domain.Shared.pdb
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicro.914497F4.Up2Date
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.dll
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\refint\AbpMicroservicesGenerator.Application.Contracts.dll
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\AbpMicroservicesGenerator.Application.Contracts.pdb
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Application.Contracts\obj\Debug\net9.0\ref\AbpMicroservicesGenerator.Application.Contracts.dll

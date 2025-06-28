@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inherits AbpMicroservicesGeneratorComponentBase
+@inject NavigationManager Navigation
+
+<AuthorizeView>
+    <Authorized>
+        <div class="d-flex align-items-center">
+            <div class="me-3">
+                <img src="/images/user-avatar.png" alt="User Avatar" class="rounded-circle" width="32" height="32" />
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-link dropdown-toggle text-decoration-none" type="button" id="userDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="text-dark">@context.User.Identity?.Name</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li>
+                        <h6 class="dropdown-header">
+                            <i class="fas fa-user me-2"></i>
+                            @context.User.Identity?.Name
+                        </h6>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/Account/Manage">
+                            <i class="fas fa-cog me-2"></i>
+                            @L["MyAccount"]
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/identity/users-custom">
+                            <i class="fas fa-users me-2"></i>
+                            @L["Menu:CustomUsers"]
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/identity/roles-custom">
+                            <i class="fas fa-user-tag me-2"></i>
+                            @L["Menu:CustomRoles"]
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <button class="dropdown-item" @onclick="BeginSignOut">
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                            @L["Logout"]
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="d-flex align-items-center">
+            <a href="authentication/login" class="btn btn-primary me-2">
+                <i class="fas fa-sign-in-alt me-1"></i>
+                @L["Login"]
+            </a>
+            <a href="authentication/register" class="btn btn-outline-primary">
+                <i class="fas fa-user-plus me-1"></i>
+                @L["Register"]
+            </a>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private void BeginSignOut(MouseEventArgs args)
+    {
+        Navigation.NavigateToLogout("authentication/logout");
+    }
+}

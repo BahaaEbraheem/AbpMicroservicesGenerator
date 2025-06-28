@@ -1,0 +1,417 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj",
+        "projectName": "AbpMicroservicesGenerator.Domain.Shared",
+        "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Projects\\AbpMicroservicesGenerator\\NuGet.Config",
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.Extensions.FileProviders.Embedded": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Volo.Abp.AuditLogging.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.BackgroundJobs.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.FeatureManagement.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.Identity.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.OpenIddict.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.PermissionManagement.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.SettingManagement.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.TenantManagement.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj",
+        "projectName": "AbpMicroservicesGenerator.Domain",
+        "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Projects\\AbpMicroservicesGenerator\\NuGet.Config",
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj": {
+                "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain.Shared\\AbpMicroservicesGenerator.Domain.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Volo.Abp.AuditLogging.Domain": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.BackgroundJobs.Domain": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.Emailing": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.FeatureManagement.Domain": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.Identity.Domain": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.OpenIddict.Domain": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.PermissionManagement.Domain.Identity": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.PermissionManagement.Domain.OpenIddict": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.SettingManagement.Domain": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.TenantManagement.Domain": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj",
+        "projectName": "AbpMicroservicesGenerator.Domain.Tests",
+        "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\AbpMicroservicesGenerator.Domain.Tests.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.Domain.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Projects\\AbpMicroservicesGenerator\\NuGet.Config",
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj": {
+                "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\src\\AbpMicroservicesGenerator.Domain\\AbpMicroservicesGenerator.Domain.csproj"
+              },
+              "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj": {
+                "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.13.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj",
+        "projectName": "AbpMicroservicesGenerator.TestBase",
+        "projectPath": "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\AbpMicroservicesGenerator.TestBase.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\AbpMicroservicesGenerator\\test\\AbpMicroservicesGenerator.TestBase\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Projects\\AbpMicroservicesGenerator\\NuGet.Config",
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.13.0, )"
+            },
+            "NSubstitute": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
+            "NSubstitute.Analyzers.CSharp": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.17, )"
+            },
+            "Shouldly": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Volo.Abp.Authorization": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.Autofac": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.BackgroundJobs.Abstractions": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Volo.Abp.TestBase": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.3, )"
+            },
+            "xunit.extensibility.execution": {
+              "target": "Package",
+              "version": "[2.9.3, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[3.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
