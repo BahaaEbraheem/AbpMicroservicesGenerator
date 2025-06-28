@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AbpMicroservicesGenerator.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71f6b87fd84b631dadf822c51a2a4ffc0d992e8e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f0c0fe0d07c7eea7d2b68bf9d58517cd359f4bb")]
 [assembly: System.Reflection.AssemblyProductAttribute("AbpMicroservicesGenerator.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AbpMicroservicesGenerator.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
