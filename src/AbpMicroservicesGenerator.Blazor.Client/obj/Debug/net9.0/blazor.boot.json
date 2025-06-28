@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "AbpMicroservicesGenerator.Blazor.Client",
   "resources": {
-    "hash": "sha256-A66uzQK4o7jNclzayKwyG8mvIG6i7mwzK769sZntRCw=",
+    "hash": "sha256-Bhe2OfINEMH8RG9dNVtv++48plTPheeMeO6QmgvuF/4=",
     "fingerprinting": {
       "AsyncKeyedLock.8gtyfvtl5q.wasm": "AsyncKeyedLock.wasm",
       "Autofac.ofsi6aqvty.wasm": "Autofac.wasm",
@@ -341,14 +341,14 @@
       "dotnet.native.aqhezbunpl.wasm": "dotnet.native.wasm",
       "dotnet.runtime.d1pzlaz2ez.js": "dotnet.runtime.js",
       "icudt.oh1zvcfom8.dat": "icudt.dat",
-      "AbpMicroservicesGenerator.Application.Contracts.oc6xn6on5f.wasm": "AbpMicroservicesGenerator.Application.Contracts.wasm",
-      "AbpMicroservicesGenerator.Domain.Shared.0luwyyi7n5.wasm": "AbpMicroservicesGenerator.Domain.Shared.wasm",
-      "AbpMicroservicesGenerator.HttpApi.Client.7llx54xtj2.wasm": "AbpMicroservicesGenerator.HttpApi.Client.wasm",
-      "AbpMicroservicesGenerator.HttpApi.Client.tsto4aj6ds.pdb": "AbpMicroservicesGenerator.HttpApi.Client.pdb",
-      "AbpMicroservicesGenerator.Application.Contracts.manaoi0bwq.pdb": "AbpMicroservicesGenerator.Application.Contracts.pdb",
-      "AbpMicroservicesGenerator.Domain.Shared.gkxwximgyb.pdb": "AbpMicroservicesGenerator.Domain.Shared.pdb",
-      "AbpMicroservicesGenerator.Blazor.Client.nixg88qyme.wasm": "AbpMicroservicesGenerator.Blazor.Client.wasm",
-      "AbpMicroservicesGenerator.Blazor.Client.5sicrmneeo.pdb": "AbpMicroservicesGenerator.Blazor.Client.pdb"
+      "AbpMicroservicesGenerator.Application.Contracts.f5lz4dq64p.wasm": "AbpMicroservicesGenerator.Application.Contracts.wasm",
+      "AbpMicroservicesGenerator.Domain.Shared.9te94q1b1e.wasm": "AbpMicroservicesGenerator.Domain.Shared.wasm",
+      "AbpMicroservicesGenerator.HttpApi.Client.sfdnsrdcfg.wasm": "AbpMicroservicesGenerator.HttpApi.Client.wasm",
+      "AbpMicroservicesGenerator.HttpApi.Client.vips2xtp7q.pdb": "AbpMicroservicesGenerator.HttpApi.Client.pdb",
+      "AbpMicroservicesGenerator.Application.Contracts.98xfd0hqf4.pdb": "AbpMicroservicesGenerator.Application.Contracts.pdb",
+      "AbpMicroservicesGenerator.Domain.Shared.gqgcltc38q.pdb": "AbpMicroservicesGenerator.Domain.Shared.pdb",
+      "AbpMicroservicesGenerator.Blazor.Client.nk45ijgohu.wasm": "AbpMicroservicesGenerator.Blazor.Client.wasm",
+      "AbpMicroservicesGenerator.Blazor.Client.oub53qysbl.pdb": "AbpMicroservicesGenerator.Blazor.Client.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.rtblh4npr3.js": "sha256-HyBzcYNpT2l19+f1bpjNOa1oFoLe3K4JIQ6GsFK5m6I="
@@ -698,16 +698,16 @@
       "WindowsBase.u25hol0de4.wasm": "sha256-CgB28KCiYKHd4yK6IM0PJ526P7IbRCpNkGTqn+cLwxs=",
       "mscorlib.brg9pkj3je.wasm": "sha256-FzZwzxUYYyg3qxc7Km8r50UKAmRWrIeckSFG1NTHKNU=",
       "netstandard.wuzd3f1y6v.wasm": "sha256-yAXc0deBIRkWTVXqADZfhgZtrxGgJCIbZYVtA0NjvdM=",
-      "AbpMicroservicesGenerator.Application.Contracts.oc6xn6on5f.wasm": "sha256-mNJ4gQutWBOD9L1UDl++O7C2q3tZ8cRfOGlkoJ1WF/8=",
-      "AbpMicroservicesGenerator.Domain.Shared.0luwyyi7n5.wasm": "sha256-LJO5oF21fWGv6Aja8XnSzy2sdV6F+AzMKK2A1E5VR2I=",
-      "AbpMicroservicesGenerator.HttpApi.Client.7llx54xtj2.wasm": "sha256-i/BrQVRG/OZZbv/MG7fPMESAtwFrLAkJKsEVObDyYT8=",
-      "AbpMicroservicesGenerator.Blazor.Client.nixg88qyme.wasm": "sha256-r1V4aaK+sVwtZ2y0sFCl5KTYJ5ta22WpfvJ03u68d2U="
+      "AbpMicroservicesGenerator.Application.Contracts.f5lz4dq64p.wasm": "sha256-LbKg4DuK2UilyRW2MAKwMamh2+gvGdmyx0eQEAEKTs4=",
+      "AbpMicroservicesGenerator.Domain.Shared.9te94q1b1e.wasm": "sha256-w1BpLyRDEnjIHOLHCrFUbPdW6fMtRSCSy+LQPtDzoLI=",
+      "AbpMicroservicesGenerator.HttpApi.Client.sfdnsrdcfg.wasm": "sha256-yFvbeY1O+XMCMqtfPsKKHBNJgL04n7PnvwFSnpfAMZc=",
+      "AbpMicroservicesGenerator.Blazor.Client.nk45ijgohu.wasm": "sha256-mdtUhDMv5jCd9Os5wg2hEX7j2xkG+cQrEu+y8m39AXk="
     },
     "pdb": {
-      "AbpMicroservicesGenerator.HttpApi.Client.tsto4aj6ds.pdb": "sha256-3UgjX44Rm/QXqy9qzw4iThQvqW+RdoWJURDPqwDjRe8=",
-      "AbpMicroservicesGenerator.Application.Contracts.manaoi0bwq.pdb": "sha256-bvTSc05wVLoOTnBmu3xgnYBg4IXookzTnt9ccYXUx6U=",
-      "AbpMicroservicesGenerator.Domain.Shared.gkxwximgyb.pdb": "sha256-8BpS5a913c58jpjjWPCMhNOzhgbfA4S0ZstiKqGzeEk=",
-      "AbpMicroservicesGenerator.Blazor.Client.5sicrmneeo.pdb": "sha256-Fe2m24KI4ecjkBlwv+0zi5kOVbgbnMQp4qqL9IQeG2Q="
+      "AbpMicroservicesGenerator.HttpApi.Client.vips2xtp7q.pdb": "sha256-yRnhkOD+JU3HjfCSMLA+Dq32ndgkBGT7IOpq6Egtec8=",
+      "AbpMicroservicesGenerator.Application.Contracts.98xfd0hqf4.pdb": "sha256-+RLaFozx5e5PvHGygdWL2kRGJtWUxRRrUufXSMPjL1I=",
+      "AbpMicroservicesGenerator.Domain.Shared.gqgcltc38q.pdb": "sha256-uCgHX5e3QToW0S2RQ79l2T3r0YDYUq/EzB3lSW1NigQ=",
+      "AbpMicroservicesGenerator.Blazor.Client.oub53qysbl.pdb": "sha256-wIlMxBg7ZgWzVFXKUJG14+Goin2AkvX83jjq6NBZuSI="
     }
   },
   "cacheBootResources": true,

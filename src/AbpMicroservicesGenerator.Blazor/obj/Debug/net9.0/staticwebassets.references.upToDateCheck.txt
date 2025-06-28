@@ -1,2 +1,4 @@
 C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Blazor.Client\obj\Debug\net9.0\staticwebassets.build.json
 C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Blazor.Client\obj\Debug\net9.0\staticwebassets.build.json
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Blazor.Client\obj\Debug\net9.0\staticwebassets.build.json
+C:\Projects\AbpMicroservicesGenerator\src\AbpMicroservicesGenerator.Blazor.Client\obj\Debug\net9.0\staticwebassets.build.json
